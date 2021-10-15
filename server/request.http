@@ -1,0 +1,56 @@
+
+GET http://localhost:5000/api/products
+
+###
+# Xem chi tiết sản phẩm
+GET http://localhost:5000/api/products/6169219521159e8746689f83
+
+###
+# Tạo sản phẩm mới
+POST http://localhost:5000/api/products
+Content-Type: application/json
+
+{
+    "nameCar":"LuuCong",
+    "imgCarUrl":"hyundaimotorvn.com/wp-content/uploads/2019/12/tucson-2019-1-450x300.png",
+    "descriptionCar":"Thực hiện ươc mơ xa",
+    "sizeCar":"1000*2000",
+    "weightCar":"120kg",
+    "indexCar":"Tiêu chuẩn iOS",
+    "costCar":"300000000"
+}
+
+###
+# Cập nhật sản phẩm
+PUT http://localhost:5000/api/products/6169219521159e8746689f83
+Content-Type: application/json
+
+{
+    "nameCar":"Hyndai Z1 No",
+    "imgCarUrl":"hyundaimotorvn.com/wp-content/uploads/2019/12/tucson-2019-1-450x300.png",
+    "descriptionCar":"Thực hiện ươc mơ xa",
+    "sizeCar":"1000*2000",
+    "weightCar":"120kg",
+    "indexCar":"Tiêu chuẩn iOS",
+    "costCar":"300000000"
+}
+
+###
+# Tạo đăng kí báo giá
+POST http://localhost:5000/api/quotes
+Content-Type: application/json
+
+{
+    "nameQuote":"Lưu Công Quang Vũ",
+    "phoneQuote":"0898709170",
+    "product":"616918a92f924db4c8500b80"
+}
+
+###
+#Xoá đăng kí báo giá 
+DELETE http://localhost:5000/api/quotes/61690ddb4d1a1710063da0bc
+
+###
+# Lấy thông tin khách đăng kí báo giá 
+GET http://localhost:5000/api/quotes
+
