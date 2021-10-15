@@ -10,7 +10,6 @@ app.use(express.json());
 
 
 
-
 route(app);
 
 app.listen(port, ()=>console.log(`server run in http://localhost:${port}`))
