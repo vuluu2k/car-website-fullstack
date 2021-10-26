@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-
+const {cloudinary} = require('../utils/cloudinary');
 
 class ProductController{
     async getProduct(req,res){
@@ -23,19 +23,44 @@ class ProductController{
         }
     }
     async createProduct(req,res){
-        const{nameCar,imgCarUrl,descriptionCar,sizeCar,weightCar,indexCar,costCar}=req.body;
-        // [Valiodation] Làm bên font-end
+        const{
+            nameCar,imgCarUrl,
+            specicalCar,descriptionCar,
+            seatsCar,madeInCar,
+            sizeCar,lengthBaseCar,
+            engineCar,workCapacityCar,
+            fuelTypeCar,fuelCapacityCar,
+            maxTorqueCar,gearCar,
+            driveSystemCar,suspensionCar,
+            brakeCar,powerSteerCar,
+            plateSizeCar,lightCar,
+            consumptionInCar,consumptionOutCar,
+            consumptionCar,TypeCar,maxPowerCar,
+            costCar}=req.body;
         if(!nameCar)
             return res.status(400)
                         .json({success: false,message:'Tên của sản phẩm là bắt buộc'});
+                        // [Valiodation] Làm bên font-end
         try {
+            const uploadedResponse = await cloudinary.uploader.upload(imgCarUrl,{
+                upload_preset:'imgCar',
+                eager:{ width: 900, height: 500, crop: "pad" }, 
+            })
+            console.log(uploadedResponse);
             const newProduct=new Product({
-                nameCar,
-                imgCarUrl:(imgCarUrl.startsWith('https://')?imgCarUrl:`https://${imgCarUrl}`),
-                descriptionCar,
-                sizeCar,
-                weightCar,
-                indexCar,
+                nameCar,imgCarId:uploadedResponse.public_id,
+                imgCarUrl:uploadedResponse.eager[0].url,
+                specicalCar,descriptionCar,
+                seatsCar,madeInCar,
+                sizeCar,lengthBaseCar,
+                engineCar,workCapacityCar,
+                fuelTypeCar,fuelCapacityCar,
+                maxTorqueCar,gearCar,
+                driveSystemCar,suspensionCar,
+                brakeCar,powerSteerCar,
+                plateSizeCar,lightCar,
+                consumptionInCar,consumptionOutCar,
+                consumptionCar,TypeCar,maxPowerCar,
                 costCar
             })
             await newProduct.save();
@@ -47,22 +72,50 @@ class ProductController{
         }
     }
     async updateProduct(req, res) {
-        const{nameCar,imgCarUrl,descriptionCar,sizeCar,weightCar,indexCar,costCar}=req.body;
+        const{
+            nameCar,
+            imgCarUrl,
+            specicalCar,descriptionCar,
+            seatsCar,madeInCar,
+            sizeCar,lengthBaseCar,
+            engineCar,workCapacityCar,
+            fuelTypeCar,fuelCapacityCar,
+            maxTorqueCar,gearCar,
+            driveSystemCar,suspensionCar,
+            brakeCar,powerSteerCar,
+            plateSizeCar,lightCar,
+            consumptionInCar,consumptionOutCar,
+            consumptionCar,TypeCar,maxPowerCar,
+            costCar}=req.body;
+        const product= await Product.findById({_id:req.params.id});
+        console.log(product);
         if(!nameCar)
             return res.status(400)
                         .json({success:false,message:'Tên sản phẩm là bắt buộc'});
         try {
+            const uploadedResponse =await cloudinary.uploader.upload(imgCarUrl,{
+                public_id:product.imgCarId,
+                overwrite:true,
+                eager:{ width: 900, height: 500, crop: "pad" }, 
+            })
             let updateProduct={
-                nameCar,
-                imgCarUrl:(imgCarUrl.startsWith('https://')?imgCarUrl:`https://${imgCarUrl}`),
-                descriptionCar,
-                sizeCar,
-                weightCar,
-                indexCar,
+                nameCar,imgCarId:uploadedResponse.public_id,
+                imgCarUrl:uploadedResponse.eager[0].url,
+                specicalCar,descriptionCar,
+                seatsCar,madeInCar,
+                sizeCar,lengthBaseCar,
+                engineCar,workCapacityCar,
+                fuelTypeCar,fuelCapacityCar,
+                maxTorqueCar,gearCar,
+                driveSystemCar,suspensionCar,
+                brakeCar,powerSteerCar,
+                plateSizeCar,lightCar,
+                consumptionInCar,consumptionOutCar,
+                consumptionCar,TypeCar,maxPowerCar,
                 costCar
             }
             const productUpdateCondition={_id:req.params.id}
-            updateProduct= await Product.findOneAndUpdate(productUpdateCondition,updateProduct);
+            updateProduct= await Product.findOneAndUpdate(productUpdateCondition,updateProduct,{new:true});
             if(!updateProduct){
                 return res.status(401).json({success:false, message:'Sản phẩm này không tồn tại'})
             }
@@ -76,10 +129,12 @@ class ProductController{
     async deleteProduct(req, res){
         try {
             const productDeleteCondition={_id:req.params.id};
+            const product= await Product.findById({_id:req.params.id});
             const deleteProduct= await Product.findOneAndDelete(productDeleteCondition);
             if(!deleteProduct)
                 return res.status(401)
                             .json({success:false,message:'Sản phẩm này không tồn tại'});
+            await cloudinary.uploader.destroy(`${product.imgCarId}`)
             res.json({success:true,message:'Xoá thành công',product:deleteProduct})
         } catch (e) {
             console.log(e);

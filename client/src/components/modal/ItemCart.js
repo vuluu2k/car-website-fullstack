@@ -1,20 +1,28 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {Card,Button} from 'react-bootstrap';
+import {ConfirmContext} from '../../contexts/ConfirmContext';
 
-export default function ItemCart() {
+export default function ItemCart({cart}) {
+    const {setShowConfirmDeleteProudctInCart} = useContext(ConfirmContext)
+    
+    const formatToCurrency=amount=>{
+        return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     return (
         <Card border="light" style={{ width: '100%' }}>
             <div className="d-flex justify-content-between align-items-center">
-                <img src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/new-santa-fe-2-2-dau-cao-cap-1806197j28891-e1631945340950.jpg" alt="" width="30%" height="30%" />
+                <img src={cart.product.imgCarUrl} alt={cart.product.nameCar} width="30%" height="30%" />
                 <Card.Body>
                     <div className="d-flex justify-content-between align-items-center">
                         <div>
-                            <Card.Title>HYUNDAI TUCSON 2021</Card.Title>
-                            <Card.Text style={{color:'red'}}>
-                                623,900,000 ₫
-                            </Card.Text>
+                            <Card.Title as="h6" style={{width: '100%'}} >{cart.product.nameCar}</Card.Title>
+                            <div className="d-flex align-items-center">
+                                <div>
+                                    {cart.quantity} x <span style={{color:'#C82333',fontWeight:'500'}}>{formatToCurrency(cart.product.costCar)}<sup>₫</sup></span>
+                                </div>
+                            </div>
                         </div>
-                        <Button variant="light"><i class="fas fa-trash-alt"></i></Button>
+                        <Button variant="outline-danger" onClick={()=>setShowConfirmDeleteProudctInCart({show:true,productId:cart.product._id})} ><i className="fas fa-trash-alt"></i></Button>
                     </div>
                 </Card.Body>
             </div>

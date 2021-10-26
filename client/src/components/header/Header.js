@@ -3,7 +3,7 @@ import NavBar from '../navbar/NavBar';
 import {Container} from 'react-bootstrap'
 import './Style.css';
 
-export default function Header() {
+export default function Header({products}) {
     return (
         <>
             <div className="topBar">
@@ -11,8 +11,10 @@ export default function Header() {
                     <div className="SubTitle">Hyundai đại học công nghiệp-dịch vụ tốt nhất</div>
                     <div className="IconClass">
                         <div className="d-flex justify-content-between align-items-center">
-                            <div>Nhận báo giá</div>
-                            <div>Giỏ hàng</div>
+                            <a className="icon_link" href="https://www.facebook.com/profile.php?id=100074297460241"><i className="fab fa-facebook"></i></a>
+                            <a className="icon_link" href="mailto:laptrinhvn2sgmail.com"><i className="fas fa-envelope"></i></a>
+                            <a className="icon_link" href="https://www.linkedin.com/in/quang-v%C5%A9-l%C6%B0u-c%C3%B4ng-973305171/"><i className="fab fa-linkedin"></i></a>
+                            <a className="icon_link" href="https://www.instagram.com/trust.for.me/"><i className=" fab fa-instagram"></i></a>
                         </div>
                     </div>
 
@@ -34,7 +36,7 @@ export default function Header() {
                     </div>
                 </Container>
             </div>
-            <NavBar />
+            <NavBar products={products} />
         </>            
     )
 }
