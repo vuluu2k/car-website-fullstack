@@ -4,6 +4,7 @@ import ControlledCarousel from '../../../components/carousel/ControlledCarousel'
 import PleaseBuyACar from '../content/home/PleaseBuyACar';
 import LineCarView from '../content/home/LineCarView';
 import ContentCard from '../../../components/card/ContentCard';
+import CardHot from '../../../components/News/cardhot';
 export default function Home({products}) {
     return (
         <>
@@ -57,13 +58,39 @@ export default function Home({products}) {
                 </Row>
             </Container>
             <div style={{backgroundColor:'#F4F4F4'}}>
-                <Container style={{padding:'36px 0'}}>
+                <Container className="newhot" style={{padding:'36px 0'}}>
                     <div  className="TitleCar d-flex">
                         <div style={{textAlign:'center',textTransform:'uppercase',fontSize:'19px',margin:'auto',fontWeight:'bold'}}>
                             <div className="SubTitleCar">TIN TỨC NỔI BẬT</div>
                             <hr style={{borderBottom:'4px solid',width:'75%',color:'rgb(255, 11, 11)'}}/>
                         </div>
                     </div>
+                    <Row className="row-cols-1 row-cols-sm-3 mx-auto">
+                    <Col>
+                        <CardHot src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
+                                title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" 
+                                content=" Với nguyên tắc chính để lùi được xe là giữ hướng thân xe chính xác theo hướng muốn di chuyển,
+                                nhưng không phải cứ nghĩ thế là làm được. Do bánh dẫn hướng nằm ở phía đầu xe, người tài xế lại bị khuất tầm nhìn, tồn tại nhiều điểm mù, nên muốn đưa chiếc […]"
+                                time="Posted on 18 Tháng Mười Hai, 2019 by admin"
+                            />
+                    </Col>
+                    <Col>
+                        <CardHot src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
+                                title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" 
+                                content=" Với nguyên tắc chính để lùi được xe là giữ hướng thân xe chính xác theo hướng muốn di chuyển,
+                                nhưng không phải cứ nghĩ thế là làm được. Do bánh dẫn hướng nằm ở phía đầu xe, người tài xế lại bị khuất tầm nhìn, tồn tại nhiều điểm mù, nên muốn đưa chiếc […]"
+                                time="Posted on 18 Tháng Mười Hai, 2019 by admin"
+                            />
+                    </Col>
+                    <Col>
+                        <CardHot src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
+                                title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" 
+                                content=" Với nguyên tắc chính để lùi được xe là giữ hướng thân xe chính xác theo hướng muốn di chuyển,
+                                nhưng không phải cứ nghĩ thế là làm được. Do bánh dẫn hướng nằm ở phía đầu xe, người tài xế lại bị khuất tầm nhìn, tồn tại nhiều điểm mù, nên muốn đưa chiếc […]"
+                                time="Posted on 18 Tháng Mười Hai, 2019 by admin"
+                            />  
+                    </Col>
+                </Row>
                 </Container>
             </div>
         </>

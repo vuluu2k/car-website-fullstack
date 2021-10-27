@@ -14,7 +14,7 @@ export default function Footer({products}) {
             <Container fluid style={{backgroundColor: '#191919'}} className="text-white"> 
                 <Container>
                     <Row style={{padding:'36px 0'}}>
-                        <Col md={3}>
+                        <Col md={4}>
                             <div style={{width:'100%'}}>
                                 <div style={{fontSize:'19.2px'}}>Thông tin liên hệ</div>
                                 <div style={{borderBottom: '3px solid white',width:'40%',margin:'8px 0'}}></div>
@@ -69,11 +69,7 @@ export default function Footer({products}) {
                                 <Link to='/support' className="font-link" >Đặt lịch bảo dưỡng</Link>
                             </div>
                         </Col>
-                        <Col md={2}>
-                            <div style={{fontSize:'19.2px'}}>Thông tin truy cập</div>
-                            <div style={{borderBottom: '3px solid white',width:'40%',margin:'8px 0'}}></div>
-                        </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                             <div>
                                 <div style={{fontSize:'19.2px'}}>Bản đồ</div>
                                 <div style={{borderBottom: '3px solid white',width:'40%',margin:'8px 0'}}></div>

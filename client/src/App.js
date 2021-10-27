@@ -36,6 +36,7 @@ function App() {
                         <Route exact path='/introduce'render={props=><Loading {...props} PageRoute='introduce' />} />
                         <Route exact path='/products'render={props=><Loading {...props} PageRoute='products' />} />
                         <Route exact path='/news'render={props=><Loading {...props} PageRoute='news' />} />
+                        <Route exact path='/news/:slug'render={props=><Loading {...props} PageRoute='newDetail' />} />
                         <Route exact path='/installment'render={props=><Loading {...props} PageRoute='installment' />} />
                         <Route exact path='/pricelist'render={props=><Loading {...props} PageRoute='pricelist' />} />
                         <Route exact path='/contact'render={props=><Loading {...props} PageRoute='contact' />} />

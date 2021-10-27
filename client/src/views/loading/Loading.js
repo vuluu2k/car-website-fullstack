@@ -3,6 +3,7 @@ import Home from '../components/page/Home';
 import Introduce from '../components/page/Introduce';
 import Products from '../components/page/Products';
 import News from '../components/page/News';
+import NewDetail from '../components/page/NewDetail';
 import Installment from '../components/page/Installment';
 import PriceList from '../components/page/PriceList';
 import Contact from '../components/page/Contact';
@@ -50,6 +51,7 @@ export default function Loading({PageRoute}) {
             {PageRoute==='introduce' &&<Introduce />}
             {PageRoute==='products' &&<Products />}
             {PageRoute==='news' &&<News />}
+            {PageRoute==='newDetail' &&<NewDetail />}
             {PageRoute==='installment' &&<Installment />}
             {PageRoute==='pricelist' &&<PriceList />}
             {PageRoute==='contact' &&<Contact />}

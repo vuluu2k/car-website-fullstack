@@ -1,10 +1,9 @@
 import React from 'react'
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col, Card} from 'react-bootstrap';
 import CardNew from '../../../components/News/cardnew';
-import CardInfor from '../../../components/News/cardinfor';
 import CardLeft from '../../../components/News/cardleft';
 
-export default function News() {
+export default function NewDetail(props) {
     return (
         <Container style={{padding:'36px 0'}}>
             <Row>
@@ -15,11 +14,18 @@ export default function News() {
                         Tin Tức</h2>
                     <hr style={{borderBottom:'4px solid',width:'25%',color:'rgb(255, 11, 11)'}}/>
 
-                     <CardInfor title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" time="Posted on 18 Tháng Mười Hai, 2019 by admin"/>
-                     <hr style={{borderBottom:'2px solid',width:'100%',color:'rgb(0, 0, 0)'}}/>
-                     <CardInfor title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" time="Posted on 18 Tháng Mười Hai, 2019 by admin"/>
-                     <hr style={{borderBottom:'2px solid',width:'100%',color:'rgb(0, 0, 0)'}}/>
-                     <CardInfor title="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN" time="Posted on 18 Tháng Mười Hai, 2019 by admin"/>
+                    <Card className="mt-5 container" style={{border:0}}>
+                        <h4>{props.title}</h4>
+                        <p>{props.time}</p>
+                        <Card.Img variant="top" src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg" />
+                        <Card.Body>
+                        <Card.Text>
+                            Với nguyên tắc chính để lùi được xe là giữ hướng thân xe chính xác theo hướng muốn di chuyển,
+                                nhưng không phải cứ nghĩ thế là làm được. Do bánh dẫn hướng nằm ở phía đầu xe, người tài xế lại bị khuất tầm nhìn, tồn tại nhiều điểm mù, nên muốn đưa chiếc […]
+                        </Card.Text>
+                        
+                        </Card.Body>
+                    </Card>
 
                 </Col>
                 <Col md={4}>
@@ -35,5 +41,6 @@ export default function News() {
                 </Col>
             </Row>
         </Container>
+        
     )
 }
