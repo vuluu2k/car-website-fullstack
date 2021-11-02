@@ -110,3 +110,7 @@ Content-Type: application/json
 # Kiểm tra tài khoản
 GET http://localhost:5000/api/accounts
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTZhZWEwYzVmNzljYjVlYjRjNjhlYjMiLCJpYXQiOjE2MzQzOTcxMTl9.-_GQ8Ti1SuFrRFKtvfw5xUJAn6apF1qgXcO8M3hf6o8
+
+###
+# Nhận news
+GET  http://localhost:5000/api/news
