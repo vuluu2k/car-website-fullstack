@@ -1,9 +1,10 @@
 
 GET http://localhost:5000/api/products
-
+###
+GET http://localhost:5000/api/comments/6169219521159e8746689f83
 ###
 # Xem chi tiết sản phẩm
-GET http://localhost:5000/api/products/6169219521159e8746689f83
+GET http://localhost:5000/api/products/6171a90e6931fc5cf2481852
 
 ###
 # Tạo sản phẩm mới
@@ -11,29 +12,52 @@ POST http://localhost:5000/api/products
 Content-Type: application/json
 
 {
-    "nameCar":"LuuCong",
+    "nameCar":"OTo tự tao",
     "imgCarUrl":"hyundaimotorvn.com/wp-content/uploads/2019/12/tucson-2019-1-450x300.png",
     "descriptionCar":"Thực hiện ươc mơ xa",
     "sizeCar":"1000*2000",
     "weightCar":"120kg",
     "indexCar":"Tiêu chuẩn iOS",
-    "costCar":"300000000"
+    "costCar":"28000000"
 }
 
 ###
 # Cập nhật sản phẩm
-PUT http://localhost:5000/api/products/6169219521159e8746689f83
+PUT http://localhost:5000/api/products/6171a90e6931fc5cf2481852
 Content-Type: application/json
 
 {
-    "nameCar":"Hyndai Z1 No",
-    "imgCarUrl":"hyundaimotorvn.com/wp-content/uploads/2019/12/tucson-2019-1-450x300.png",
-    "descriptionCar":"Thực hiện ươc mơ xa",
-    "sizeCar":"1000*2000",
-    "weightCar":"120kg",
-    "indexCar":"Tiêu chuẩn iOS",
-    "costCar":"300000000"
-}
+    "nameCar": "HYUNDAI KONA 2021",
+    "imgCarUrl": "https://res.cloudinary.com/vuluu/image/upload/v1635051503/CarProject/imgCar/b7x3nmotf6pa4vy4bkzu.png",
+    "specicalCar": "-Kích thước tổng thể (DxRxC) (mm)4.165 x 1.800 x 1.565\n-Chiều dài cơ sở (mm)2600\n-Khoảng cách hai bánh xe trước/sau (mm)170\n-Bán kính quay vòng nhỏ nhất (Bánh xe/ Thân xe) (m)",
+    "descriptionCar": "DÁM KHÁC BIỆT\nĐôi khi những khoảnh khắc đẹp nhất là những giây phút bất ngờ đầy cảm hứng khác biệt mà chúng ta không chuẩn bị trước. Đó chính là tinh thần của Kona, là sự kết hợp của phong cách năng động cùng hiệu suất vận hành với những công nghệ hiện đại hàng đầu.\n\n\nPHONG CÁCH CỦA BẠN\nVới những đường nét thiết kế sắc nét cá tính, Hyundai Kona trở nên bắt mắt dưới mọi góc nhìn. Sở hữu những màu sắc bắt mắt và độc đáo, Kona giúp bạn nổi bật hơn, khác biệt hơn với số đông.\n\nBẠN TỎA SÁNG\nHyundai Kona là sự sáng tạo định hình nên một ngôn ngữ thiết kế SUV hoàn toàn mới. Cặp đèn LED chạy ban ngày ở phía trước tạo nên một dải ánh sáng ấn tượng, giúp bạn tỏa sáng trên mỗi chặng đường đi qua.\n\n\n\nKẾT NỐI KHÔNG GIỚI HẠN\nHyundai Kona sở hữu khả năng kết nối mạnh mẽ thông qua màn hình cảm ứng 8 inch tích hợp hệ thống dẫn đường vệ tinh. Bạn có thể kết nối với Kona thông qua Apple Carplay hoặc các phương thức truyền thống như Bluetooth/AUX/USB.",
+    "seatsCar": 10,
+    "TypeCar": "Kona",
+    "madeInCar": "USA",
+    "sizeCar": "4.165 x 1.800 x 1.565",
+    "lengthBaseCar": "2.600",
+    "engineCar": "Nu 2.0 MPI Atkinson",
+    "workCapacityCar": "1000l",
+    "fuelTypeCar": "1000000000000000000",
+    "fuelCapacityCar": "20000000000000",
+    "maxPowerCar": "1000 mã lưc",
+    "maxTorqueCar": "2000",
+    "gearCar": "",
+    "driveSystemCar": "",
+    "suspensionCar": "",
+    "brakeCar": "Phanh trợ lực",
+    "powerSteerCar": "",
+    "plateSizeCar": "",
+    "lightCar": "170",
+    "consumptionInCar": "",
+    "consumptionOutCar": "",
+    "consumptionCar": "160/180",
+    "costCar": 658000000,
+    "createdAt": "2021-10-21T17:53:18.197Z",
+    "updatedAt": "2021-10-21T17:53:18.197Z",
+    "slug": "hyundai-kona-2021",
+    "__v": 0
+  }
 
 ###
 # Tạo đăng kí báo giá
@@ -48,9 +72,42 @@ Content-Type: application/json
 
 ###
 #Xoá đăng kí báo giá 
-DELETE http://localhost:5000/api/quotes/61690ddb4d1a1710063da0bc
+DELETE http://localhost:5000/api/quotes/616a4fa20b647b3ab2274338
 
 ###
 # Lấy thông tin khách đăng kí báo giá 
 GET http://localhost:5000/api/quotes
+###
+#Tạo comment
+POST http://localhost:5000/api/comments
+Content-Type: application/json
 
+{
+    "nameComment":"Đỗ Đình Name",
+    "emailComment":"dodinhnam2k@gmail.com",
+    "contentComment":"Ô tô nhìn đẹp phết",
+    "product":"6169219521159e8746689f83"
+}
+###
+# Tạo tài khoản
+POST http://localhost:5000/api/accounts/create
+Content-Type: application/json
+
+{
+    "nameAccount":"admin",
+    "passwordAccount":"1234"
+}
+
+###
+# Đăng nhập tài khoản
+POST http://localhost:5000/api/accounts/login
+Content-Type: application/json
+
+{
+    "nameAccount":"admin",
+    "passwordAccount":"1234"
+}
+###
+# Kiểm tra tài khoản
+GET http://localhost:5000/api/accounts
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTZhZWEwYzVmNzljYjVlYjRjNjhlYjMiLCJpYXQiOjE2MzQzOTcxMTl9.-_GQ8Ti1SuFrRFKtvfw5xUJAn6apF1qgXcO8M3hf6o8
