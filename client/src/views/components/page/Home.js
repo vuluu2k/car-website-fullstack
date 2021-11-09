@@ -4,8 +4,7 @@ import ControlledCarousel from '../../../components/carousel/ControlledCarousel'
 import PleaseBuyACar from '../content/home/PleaseBuyACar';
 import LineCarView from '../content/home/LineCarView';
 import ContentCard from '../../../components/card/ContentCard';
-
-export default function Home() {
+export default function Home({products}) {
     return (
         <>
             <ControlledCarousel />
@@ -16,7 +15,7 @@ export default function Home() {
                         <hr style={{borderBottom:'4px solid',width:'75%',color:'rgb(255, 11, 11)'}}/>
                     </div>
                 </div>
-                <PleaseBuyACar />
+                <PleaseBuyACar products={products} />
             </Container>
             <div style={{backgroundColor:'#F4F4F4'}}>
                 <Container style={{padding:'36px 0'}}>
@@ -26,7 +25,7 @@ export default function Home() {
                             <hr style={{borderBottom:'4px solid',width:'75%',color:'rgb(255, 11, 11)'}}/>
                         </div>
                     </div>
-                    <LineCarView />
+                    <LineCarView products={products}  />
                 </Container>
             </div>
             <Container style={{padding:'36px 0'}}>

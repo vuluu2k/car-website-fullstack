@@ -14,7 +14,7 @@ class QuoteController {
                 product
             })
             await newQuote.save();
-            res.json({success:true,message:'Bạn đăng kí nhận báo giá thành công'});
+            res.json({success:true,message:'Bạn đăng kí nhận báo giá thành công',quote:newQuote});
         } catch (e) {
             console.log(e);
             res.status(500)
@@ -23,10 +23,8 @@ class QuoteController {
     }
     async getQuote(req, res) {
         try {
-            const quotes=await Quote.find({});
-            const idProducts = quotes.map(quote=>quote.product);
-            const products=await Product.find({_id:idProducts})
-            res.json({success:true,quotes,products})
+            const quotes=await Quote.find({}).populate({path:'product'});
+            res.json({success:true,quotes})
         } catch (e) {
             console.log(e);
             res.status(500)

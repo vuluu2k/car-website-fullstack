@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import './Style.css'
 import Map from '../map/Map';
 
-export default function Footer() {
+export default function Footer({products}) {
     return (
         <>
             <Container >
@@ -38,27 +38,11 @@ export default function Footer() {
                         <Col md={2}>
                             <div style={{fontSize:'19.2px'}}>Sản phẩm</div>
                             <div style={{borderBottom: '3px solid white',width:'40%',margin:'8px 0'}}></div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link">HYUNDAI GRAND I10</Link>   
-                            </div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link" >GRAND I10 SEDAN</Link>
-                            </div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link" >HYUNDAI ACCENT</Link>
-                            </div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link" >HYUNDAI ELANTRA</Link>
-                            </div>
-                            <div className="mt-12">
-                                <Link to= '/support' className="font-link" >HYUNDAI KONA</Link>
-                            </div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link" >HYUNDAI TUCSON</Link>
-                            </div>
-                            <div className="mt-12">
-                                <Link to='/support' className="font-link" >HUNDAI H150</Link>
-                            </div>
+                            {products.map(product=>(
+                                <div className="mt-12" key={product._id}>
+                                    <Link to={`/products/${product.slug}`} className="font-link">{product.nameCar}</Link>   
+                                </div>
+                            ))}
                         </Col >
                         <Col md={2}>
                             <div style={{fontSize:'19.2px'}}>Dịch vụ hậu mãi</div>
