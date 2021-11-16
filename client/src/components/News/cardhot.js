@@ -7,7 +7,7 @@ export default function cardnew(props) {
     return (
         <Card>
             <Link style={{color:'black',textDecoration: 'none'}}>
-                <Card.Img variant="top" src={props.src} />
+                <Card.Img variant="top" src={props.src}  height="250px"/>
             </Link>
             <Card.Body>
                 <Link style={{color:'black',textDecoration: 'none'}}>
