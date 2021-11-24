@@ -8,16 +8,7 @@ import {apiUrl,LOCAL_STORAGE_ACCOUNT_NAME,SET_ACCOUNT,
 import { accountReducer } from '../reducers/accountReducer';
 import setAccountToken from '../utils/setAccountToken';
 import axios from 'axios'
-// ---------------------------------- 
-// import {
-    
-//     ACCOUNT_LOAD_SUCCESS,
-//     ACCOUNT_LOAD_FAIL,
-//     ACCOUNT_UPDATE_SUCCESS,
-//     DELETE_ACCOUNT_SUCESS
-// }   from './contants';
 
-// ----------------------------------
 
 export const AccountContext= createContext();
 
@@ -96,11 +87,16 @@ const getAccount=async ()=>{
 
 // ------------------------------------------
 
-    const accountContextData={accountState,loginAccount,logoutAccount,getAccount}
-    return (
-        <AccountContext.Provider value={accountContextData}>
-            {children}
-        </AccountContext.Provider>
-    )
+
+const accountContextData={accountState,loginAccount,logoutAccount,getAccount}
+return (
+    <AccountContext.Provider value={accountContextData}>
+        {children}
+    </AccountContext.Provider>
+)
+
+
+
+
 }
 export default AccountContextProvider;

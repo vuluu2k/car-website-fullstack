@@ -6,7 +6,7 @@ const verifytoken = require('../middlewares/account');
 // [Admin]
 router.get('/',verifytoken,AccountController.checkAccount);
 
-// [Admin]Tạo tài khoản 
+// [Admin]Tạo tài khoản  
 router.post('/create',AccountController.createAccount);
 
 // [Admin]Đăng nhập tài khoản

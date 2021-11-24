@@ -85,7 +85,7 @@ export default function AdminAccount() {
                                     { item.passwordAccount }
                                 </td>
                             
-                            </tr>
+                            </tr> 
                     
                     ))}
 {/* ------------------------------------------ */}

@@ -6,7 +6,7 @@ import {
 
 export const productReducer=(state,action)=>{
     const {type,payload} =action;
-    switch(type){
+    switch(type){ 
         case PRODUCT_LOAD_SUCCESS:
             return {
                 ...state,
