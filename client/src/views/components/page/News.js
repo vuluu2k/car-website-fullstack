@@ -1,6 +1,5 @@
 import React from 'react'
-import {Container,Row,Col} from 'react-bootstrap';
-import CardNew from '../../../components/News/cardnew';
+import {Container,Row,Col, Card} from 'react-bootstrap';
 import CardLH from '../../../components/News/cardlh';
 import CardInfor from '../../../components/News/cardinfor';
 import CardLeft from '../../../components/News/cardleft';
@@ -36,14 +35,14 @@ export default function News() {
                 <Col md={4}>
                     <CardLH title="HỖ TRỢ TRỰC TUYẾN" 
                         content="Hotline Đặt Hàng 0815554111" />
-                    <CardNew title="TIN TỨC CẬP NHẬT"
-                     content={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                                                    content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        content={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                             content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        content={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                             content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        />
+                    <Card.Header style={{backgroundColor:'#dc3545',color:'white',fontWeight:'bold'}}>TIN TỨC CẬP NHẬT</Card.Header>
+                    <Card.Body>
+                    {news.map(item => (
+                        <div key={item._id}>
+                            <CardLeft src={item.imageNewUrl} content={item.titleNew} />
+                        </div>
+                    ))}
+                     </Card.Body>
                 </Col>
             </Row>
         </Container>

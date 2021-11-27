@@ -1,9 +1,18 @@
 import React from 'react'
 import {Container,Row,Col, Card} from 'react-bootstrap';
-import CardNew from '../../../components/News/cardnew';
 import CardLeft from '../../../components/News/cardleft';
+import CardLH from '../../../components/News/cardlh';
+import {NewContext} from '../../../contexts/NewContext'
+import {useContext,useEffect} from 'react';
 
 export default function NewDetail(props) {
+    const {getNew, newState:{news}} = useContext(NewContext)
+
+    useEffect(()=>{
+        getNew()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[news]);
+
     return (
         <Container style={{padding:'36px 0'}}>
             <Row>
@@ -29,15 +38,16 @@ export default function NewDetail(props) {
 
                 </Col>
                 <Col md={4}>
-                    <CardNew title="HỖ TRỢ TRỰC TUYẾN" 
+                    <CardLH title="HỖ TRỢ TRỰC TUYẾN" 
                         content="Hotline Đặt Hàng 0815554111" />
-                    <CardNew title="TIN TỨC CẬP NHẬT" content={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                                                    content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        content1={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                             content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        content2={<CardLeft src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg"
-                             content="12 NGUYÊN TẮC LÙI XE Ô TÔ ĐÚNG VÀ AN TOÀN"></CardLeft>}
-                        />
+                    <Card.Header style={{backgroundColor:'#dc3545',color:'white',fontWeight:'bold'}}>TIN TỨC CẬP NHẬT</Card.Header>
+                    <Card.Body>
+                    {news.map(item => (
+                        <div key={item._id}>
+                            <CardLeft src={item.imageNewUrl} content={item.titleNew} />
+                        </div>
+                    ))}
+                     </Card.Body>
                 </Col>
             </Row>
         </Container>

@@ -6,9 +6,9 @@ export default function cardleft(props) {
 
     return (
         
-        <Row>
+        <Row className="mb-2">
             <Col md={4}>
-                <Link style={{color:'black',textDecoration: 'none'}}>
+                <Link to="news/detail" as={Link} style={{color:'black',textDecoration: 'none'}}>
                     <Card.Img src={props.src} alt="..." />
                 </Link>
             </Col>
