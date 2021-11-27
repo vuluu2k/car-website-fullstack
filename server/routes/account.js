@@ -15,7 +15,7 @@ router.post('/login',AccountController.loginAccount);
 
 // -------------------------
 // [Admin] GET ACCOUNT
-router.get('/', AccountController.getAccount);
+router.get('/accountView', AccountController.getAccount);
 
 
 

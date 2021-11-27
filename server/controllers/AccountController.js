@@ -67,7 +67,7 @@ class AccountController{
     async getAccount(req, res){
         try {
             const accounts = await Account.find({});
-            res.json({success: true, accounts})
+            res.json({success: true, accounts:accounts})
         } catch (e) {
             console.log(e);
             res.status(500)

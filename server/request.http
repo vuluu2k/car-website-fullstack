@@ -114,8 +114,8 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MT
 # --------------------------------------------------------------
 ###
 # Nhận tài khoản
-# GET http://localhost:5000/api/accounts
-
+GET http://localhost:5000/api/accounts
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTZhZWEwYzVmNzljYjVlYjRjNjhlYjMiLCJpYXQiOjE2MzgwMjIzMTd9.9KQw9gXulydrwLyhMIqmfq02hdRIaiLu0MpgpsqOFgY
 
 
 

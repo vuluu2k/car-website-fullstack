@@ -18,11 +18,11 @@ export default function AdminAccount() {
 // ---------------------------------
 
     const {getAccount, accountState: {accounts} } = useContext(AccountContext)
-
     useEffect(() =>{
         getAccount()
         // eslint-disable-nest-line react-hooks/exhaustive-deps
-    },[accounts]);
+    },[]);
+    console.log(accounts)
 
 // ---------------------------------
     return (

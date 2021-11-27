@@ -74,10 +74,11 @@ const AccountContextProvider = ({children}) =>{
 
 const getAccount=async ()=>{
     try {
-        const response=await axios.get(`${apiUrl}/accounts`)
+        const response=await axios.get(`${apiUrl}/accounts/accountView`)
+        // console.log(response.data)
         if(response.data.success){
             // dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:response.data.accounts})
-            dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:response.data.accounts})
+            dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:{isAuthenticated:true,accounts:response.data.accounts}})
         }
     } catch (e) {
         dispatch({type:ACCOUNT_LOAD_FAIL})

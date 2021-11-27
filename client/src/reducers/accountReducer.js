@@ -14,7 +14,7 @@ import {SET_ACCOUNT,
 // ------------------------------------------------
 
 export const accountReducer=(state,action)=>{
-    const { type,payload:{isAuthenticated,account}} = action;
+    const { type,payload:{isAuthenticated,account,accounts}} = action;
     switch(type){
         case SET_ACCOUNT:
             return{ 
@@ -23,7 +23,14 @@ export const accountReducer=(state,action)=>{
                 isAuthenticated,
                 account
             }
-
+        case ACCOUNT_LOAD_SUCCESS:
+            console.log(accounts)
+            return {
+                ...state,
+                accountsLoading:false,
+                isAuthenticated,
+                accounts
+            }
 
         default:
             return state;
@@ -31,42 +38,42 @@ export const accountReducer=(state,action)=>{
 }
 //--------------------------------------
 
-export const accountReducer2= (state,action)=>{
-    const {type,payload} = action;
-    switch(type){
-        case PRODUCT_LOAD_SUCCESS:
-            return{
-                ...state,
-                accounts:payload,
-                accountsLoading:false
-            }
-        case ACCOUNT_LOAD_FAIL:
-            return {
-                ...state,
-                accounts:[],
-                accountsLoading:false
-            }
-        case ACCOUNT_UPDATE_SUCCESS:
-            const newAcounts=state.acounts.map(account =>{
-                if(account._id===payload._id)
-                    return payload
-                return account
-            }) 
-            return{
-                ...state,
-                products:newAcounts
-            } 
-        case DELETE_ACCOUNT_SUCESS:
-            return{
-                ...state,
-                accounts:state.accounts.filter(account=>{
-                    return account._id!==payload;
-                })
-            }
-        default:
-            return state;
-    }
+// export const accountReducer2= (state,action)=>{
+//     const {type,payload} = action;
+//     switch(type){
+//         case PRODUCT_LOAD_SUCCESS:
+//             return{
+//                 ...state,
+//                 accounts:payload,
+//                 accountsLoading:false
+//             }
+//         case ACCOUNT_LOAD_FAIL:
+//             return {
+//                 ...state,
+//                 accounts:[],
+//                 accountsLoading:false
+//             }
+//         case ACCOUNT_UPDATE_SUCCESS:
+//             const newAcounts=state.acounts.map(account =>{
+//                 if(account._id===payload._id)
+//                     return payload
+//                 return account
+//             }) 
+//             return{
+//                 ...state,
+//                 products:newAcounts
+//             } 
+//         case DELETE_ACCOUNT_SUCESS:
+//             return{
+//                 ...state,
+//                 accounts:state.accounts.filter(account=>{
+//                     return account._id!==payload;
+//                 })
+//             }
+//         default:
+//             return state;
+//     }
 
-} 
+// } 
 
 
