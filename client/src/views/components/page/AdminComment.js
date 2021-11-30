@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react'
 import {useContext, useState} from 'react'
 import {Row,Col, Container,Card,Table,Spinner,Button} from 'react-bootstrap'
+import {ConfirmContext} from '../../../contexts/ConfirmContext';
 import {CommentContext} from '../../../contexts/CommentContext'
 import { ProductContext } from '../../../contexts/ProductContext'
+import ConfirmModal from '../../../components/modal/ConfirmModal'
 import moment from 'moment';
 export default function AdminComment() {
-    const {getComment,commentState:{comments}}=useContext(CommentContext)
+    const {getComment,commentState:{comments},
+            
+            deleteComment
+            }=useContext(CommentContext)
+     const {showConfirmDeleteComment:{show,commentId},setShowConfirmDeleteComment} = useContext(ConfirmContext)
     const {getProduct,productState:{products,productsLoading}}=useContext(ProductContext)
+    
+
     const [stateProductId,setStateProductId]=useState({
         productId:productsLoading===false&&(products[0]._id)
     }) 
@@ -19,6 +27,11 @@ export default function AdminComment() {
         getProduct()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
+    const handleDelComment = ()=>{
+        deleteComment(commentId);
+        handleClose();
+    }
+    const handleClose =() =>setShowConfirmDeleteComment({show:false,commentId:''});
     return (
         <Container>
             <Row>
@@ -65,10 +78,10 @@ export default function AdminComment() {
                     <td>
                     <center>
                                     <div className="d-flex justify-content-around align-items-center">
-                                        <a href={`email:${comment.nameComment}`}>
-                                            <Button variant="outline-primary" size="sm" ><i className="fas fa-email"></i></Button>
+                                        <a href={`tel:${comment.nameComment}`}>
+                                            <Button variant="outline-primary" size="sm" ><i className="fas fa-envelope"></i></Button>
                                         </a>
-                                        <Button variant="outline-primary" size="sm" ><i className="fas fa-trash"></i></Button>
+                                        <Button onClick={()=>setShowConfirmDeleteComment({show:true,commentId:comment._id})} style={{marginLeft:'10px'}} variant="outline-primary" size="sm" ><i className="fas fa-trash"></i></Button>
                                     </div>
                                 </center>
                     </td>
@@ -79,6 +92,8 @@ export default function AdminComment() {
                 </Table>
                 </Col>
             </Row>
+            <ConfirmModal title="Xác nhận" content="Bạn chắc chắn muốn xoá" show={show} onClick={()=>handleDelComment()} onClose={handleClose} />
         </Container>
+        
     )
 }
