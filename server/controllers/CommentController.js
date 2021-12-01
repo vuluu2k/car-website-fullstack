@@ -3,7 +3,7 @@ const Comment = require('../models/Comment');
 
 class CommentController{
     async createComment(req, res){
-        const {nameComment,emailComment,websiteComment,contentComment,product} = req.body;
+        const {nameComment,emailComment,websiteComment,contentComment,product,rate} = req.body;
         if(!nameComment||!emailComment)
             return res.status(400)
                         .json({success: false,message:'Tên và email là trường bắt buộc'});

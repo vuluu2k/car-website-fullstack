@@ -1,92 +1,68 @@
-import React,{useState} from 'react'
+import React from 'react'
+import {useContext,useState} from 'react';
 //Bootstrap and jQuery libraries
 import 'bootstrap/dist/css/bootstrap.min.css';
 //Star Rating and other modules
-import { Rate, Form, Input, Button } from 'antd';
+import { Rate, Input, Button, Row } from 'antd';
 import "antd/dist/antd.css";
-
+import {CommentContext} from '../../contexts/CommentContext';
+import {ProductContext} from '../../contexts/ProductContext';
+import {Form} from 'react-bootstrap'
 export default function Comment() {
-    
-    const { TextArea } = Input;
+    const {showComment, setShowComment,createComment,setShowToastComment} = useContext(CommentContext);
+    const {productState:{products}}=useContext(ProductContext);
+    const [newComment,setNewComment]=useState({
+      nameComment:'',
+      emailComment:'',
+      product:'',
+      contentComment:'',
+      rate:'',
+    })
+    const {nameComment, emailComment,product,contentComment,rate} =newComment;
+    const onChangeCreateCommentForm= event => setNewComment({
+      ...newComment,
+      [event.target.name]:event.target.value
+    })
+    const onSubmit = async event=>{
+        event.preventDefault();
+        const {success,message}=await createComment(newComment);
+        setShowToastComment({show:success,message});
+        handleClose();
+      }
+    const handleClose = () => setShowComment(false);
+    //const { TextArea } = Input;
     return (
         <div>
-            
-                <Form.Item
-                style={{margin:'20px'}}
-                label="Họ tên"
-                name="username"
-                
-                rules={[
-                    {
-                    type: 'text',
-                    message: 'Vui lòng nhập tên!',
-                    },
-                    {
-                    required: true,
-                    message: 'Vui lòng nhập tên!',
-                    },
-                ]}
-               
-                >
-                <Input />
-                </Form.Item>
-                
-        
-                <Form.Item
-                 style={{margin:'20px'}}
-                label="Email"
-                name="email"
-                
-                rules={[
-                    {
-                    type: 'email',
-                    message: 'Email không đúng!',
-                    },
-                    {
-                    required: true,
-                    message: 'Vui lòng nhập Email!',
-                    },
-                ]}
-                
-                >
-                <Input />
-                </Form.Item>
-                <Form.Item
-                 style={{margin:'20px'}}
-                label="Nội dung"
-                name="comment"
-                
-                rules={[
-                    {
-                    type: 'comment',
-                    message: 'Vui lòng nhập nội dung!',
-                    },
-                    {
-                    required: true,
-                    message: 'Vui lòng nhập nội dung!',
-                    },
-                ]}
-                
-                >
-                <TextArea rows={4}/>
-                </Form.Item>
-        
-                <Form.Item
-                style={{margin:'20px'}}
-                    label="Đánh giá"
-                    name="rating"
-                   
-                >
-                
-                <Rate allowHalf defaultValue={2.5} />
-                </Form.Item>
-        
-                <Form.Item>
-                <Button type="primary" htmlType="submit" >
+                <Form.Group style={{margin:'20px'}}>
+                    <Form.Text style={{fontSize:'15px'}}>Họ tên: </Form.Text>
+                    <Form.Control style={{margin:'5px'}} type='text' placeholder='Họ và tên' value={nameComment} name='nameComment' onChange={onChangeCreateCommentForm} required/>
+                </Form.Group>
+                <Form.Group style={{margin:'20px'}}>
+                    <Form.Text style={{fontSize:'15px'}}>Email: </Form.Text>
+                    <Form.Control type='text' style={{margin:'5px'}} placeholder='Email' value={emailComment} name='emailComment' onChange={onChangeCreateCommentForm} required/>
+                </Form.Group>
+                <Form.Group style={{margin:'20px'}}>
+                    <Form.Text style={{fontSize:'15px'}}>Nội dung: </Form.Text>
+                    <Form.Control type='text' Row = {4} style={{margin:'5px'}} value={contentComment} name='contentComment' onChange={onChangeCreateCommentForm} required/>
+                </Form.Group>
+                <Form.Group style={{margin:'20px'}}>
+                    <Form.Text style={{fontSize:'15px'}}>Đánh giá: </Form.Text>
+                    
+                    <Rate defaultValue={2} ></Rate>
+                </Form.Group>
+                <Form.Group style={{margin:'20px'}}>
+                    <Form.Control as='select' value={product} name='product' onChange={onChangeCreateCommentForm}>
+                        <option value="">--Chọn sản phẩm muốn đánh giá-</option>
+                        {products.map(product=>(
+                          <option value={product._id} key={product._id}>{product.nameCar}</option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Button htmlType="submit" onClick={onSubmit} style={{margin:'20px'}}>
                     Gửi
-                </Button>
-                </Form.Item>
-            
+                 </Button>
+          
+          
         </div>
     )
 }

@@ -40,7 +40,7 @@ export default function AdminComment() {
                 {products.map(product=>(
                         <Row className="d-flex align-items-center" style={{borderBottom:'1px solid #0091ff' }} onClick={()=>setStateProductId({
                             productId:product._id
-                        })}>
+                        }) }>
                         <Col xs="5"> 
                              <Card.Img variant="top" src={product.imgCarUrl} />
                         </Col>

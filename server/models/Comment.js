@@ -21,6 +21,10 @@ const CommentSchema = new Schema(
             type:Schema.Types.ObjectID,
             ref:'products'
         },
+        rate:{
+            type:String,
+            //required:true
+        },
         isCheck:{
             type:Boolean,
             default:false
