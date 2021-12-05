@@ -38,7 +38,7 @@ export default function CartModal() {
             <Button to="/cart" variant="danger" onClick={handleClose} as={Link} >
               Xem giỏ hàng
             </Button>
-            <Button variant="dark" onClick={handleClose}>
+            <Button to="/pay" as={Link}  variant="dark" onClick={handleClose}>
               Thanh toán
             </Button>
           </Modal.Footer>

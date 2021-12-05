@@ -1,14 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import { Container,Card,Button,Row,Col,Spinner,Modal,Image,Nav,Tab } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 import Comment from '../../../components/comment/Comment';
 import DescriptionCar from '../../../components/description/DescriptionCar';
 import parse from 'html-react-parser';
-
+import {CartContext} from '../../../contexts/CartContext'
 export default function ProductDetail({products,productsLoading}) {
     const {slug}=useParams();
     const [show,setShow]=useState(false);
     const handleClose=()=>setShow(false);
+    const {addToCart} = useContext(CartContext);
     if(productsLoading){
         return (
             <div className="d-flex justify-content-center mt-2">
@@ -36,7 +37,7 @@ export default function ProductDetail({products,productsLoading}) {
                                 </Card.Text>
                                 <div className="d-flex justify-content-between">
                                     {formatToCurrency(productSlug.costCar)}₫
-                                    <Button variant="danger">ĐẶT HÀNG</Button>
+                                    <Button variant="danger" onClick={()=>addToCart(productSlug._id)}>ĐẶT HÀNG</Button>
                                 </div>
                             </Card.Body>
                         </Col>

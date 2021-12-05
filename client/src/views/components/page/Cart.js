@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {Row, Col,Container,Table,Button} from 'react-bootstrap';
 import {useContext} from 'react';
 import {CartContext} from '../../../contexts/CartContext';
@@ -61,9 +62,9 @@ export default function Cart() {
                         </tbody>
                     </Table>
                     <div>
-                        <Button variant="outline-danger" style={{fontWeight:'600',width:'50%'}}>
+                        <Button to="/home" as={Link} variant="outline-danger" style={{fontWeight:'600',width:'50%'}}>
                             <i className="fas fa-arrow-left"></i>
-                            <span style={{paddingLeft:'5px'}}>TIẾP TỤC XEM SẢN PHẨM</span>
+                            <span to='/home' style={{paddingLeft:'5px'}}>TIẾP TỤC XEM SẢN PHẨM</span>
                         </Button>
                     </div>
                 </Col>
@@ -85,7 +86,7 @@ export default function Cart() {
                             </tr>
                             <tr >
                                 <th colSpan="2" style={{padding:"12px 0"}}>
-                                    <Button variant="dark" style={{width:'100%',fontWeight:'600'}}>TIẾN HÀNH THANH TOÁN</Button>
+                                    <Button to="/pay" as={Link} variant="dark" style={{width:'100%',fontWeight:'600'}}>TIẾN HÀNH THANH TOÁN</Button>
                                 </th>
                             </tr>
                             <tr>

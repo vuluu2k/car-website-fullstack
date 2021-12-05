@@ -40,6 +40,7 @@ function App() {
                         <Route exact path='/pricelist'render={props=><Loading {...props} PageRoute='pricelist' />} />
                         <Route exact path='/contact'render={props=><Loading {...props} PageRoute='contact' />} />
                         <Route exact path='/cart'render={props=><Loading {...props} PageRoute='cart' />} />
+                        <Route exact path='/pay'render={props=><Loading {...props} PageRoute='pay' />} />
                         <Route exact path='/products/:slug'render={props=><Loading {...props} PageRoute='productDetail' />} />
                         <Route exact path='/admin' render={props=><Admin {...props} AdminRoute='AdminLogin' />} />
                         <ProtectedRoute exact path='/admin/home' component={AdminHome} />
