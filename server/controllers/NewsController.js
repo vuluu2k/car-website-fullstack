@@ -5,6 +5,9 @@ class NewsController {
     async getNew(req, res){
         try {
             const news= await New.find({});
+            
+           
+            
             res.json({success: true, news})
         } catch (e) {
             console.log(e);
@@ -27,7 +30,7 @@ class NewsController {
         const{titleNew,
             contentNew,imageNewUrl,
             imageNewId
-            }=req.body;
+            }=req.body; 
         if(!titleNew)
             return res.status(400)
                         .json({success: false,message:'tiêu đề bài viết là bắt buộc'});

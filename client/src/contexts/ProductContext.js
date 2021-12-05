@@ -27,7 +27,7 @@ const ProductContextProvider = ({children})=>{
         show:false,productId:''
     });
     // [GET] PRODUCTS
-    const getProduct=async ()=>{
+    const getProduct=async ()=>{ 
         try {
             const response=await axios.get(`${apiUrl}/products`)
             if(response.data.success){
