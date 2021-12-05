@@ -10,9 +10,7 @@ const CommentSchema = new Schema(
             type:String,
             required:true
         },
-        websiteComment:{
-            type:String
-        },
+    
         contentComment:{
             type:String,
             required:true
@@ -23,7 +21,7 @@ const CommentSchema = new Schema(
         },
         rate:{
             type:String,
-            //required:true
+           
         },
         isCheck:{
             type:Boolean,

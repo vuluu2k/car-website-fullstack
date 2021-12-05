@@ -78,7 +78,7 @@ export default function AdminComment() {
                     <td>
                     <center>
                                     <div className="d-flex justify-content-around align-items-center">
-                                        <a href={`tel:${comment.nameComment}`}>
+                                        <a href={`mailTo:${comment.nameComment}`}>
                                             <Button variant="outline-primary" size="sm" ><i className="fas fa-envelope"></i></Button>
                                         </a>
                                         <Button onClick={()=>setShowConfirmDeleteComment({show:true,commentId:comment._id})} style={{marginLeft:'10px'}} variant="outline-primary" size="sm" ><i className="fas fa-trash"></i></Button>
