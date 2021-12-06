@@ -1,6 +1,7 @@
 const express = require('express');
 const router=express.Router();
 const ProductController=require('../controllers/ProductController');
+const verifytoken = require('../middlewares/account');
 
 // [User && Admin] Xem sản phẩm
 

@@ -1,38 +1,100 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const slug=require('mongoose-slug-generator');
 const ProductSchema=new Schema(
     {
         nameCar:{
             type:String,
             required:true
         },
+        imgCarId:{
+            type:String
+        },
         imgCarUrl:{
             type:String,
-            required:true
+        },
+        specicalCar:{
+            type:String
         },
         descriptionCar:{
-            type:String,
-            required:true
+            type:String
+        },
+        seatsCar:{
+            type:Number
+        },
+        TypeCar:{
+            type:String
+        },
+        madeInCar:{
+            type:String
         },
         sizeCar:{
-            type:String,
-            required:true
+            type:String
         },
-        weightCar:{
-            type:String,
-            required:true
+        lengthBaseCar:{
+            type:String
         },
-        indexCar:{
+        engineCar:{
+            type:String
+        },
+        workCapacityCar:{
+            type:String
+        },
+        fuelTypeCar:{
+            type:String
+        },
+        fuelCapacityCar:{
+            type:String
+        },
+        maxPowerCar:{
+            type:String
+        },
+        maxTorqueCar:{
+            type:String
+        },
+        gearCar:{
+            type:String
+        },
+        driveSystemCar:{
+            type:String
+        },
+        suspensionCar:{
+            type:String
+        },
+        brakeCar:{
+            type:String
+        },
+        powerSteerCar:{
             type:String,
-            required:true,
+        },
+        plateSizeCar:{
+            type:String
+        },
+        lightCar:{
+            type:String
+        },
+        consumptionInCar:{
+            type:String
+        },
+        consumptionOutCar:{
+            type:String
+        },
+        consumptionCar:{
+            type:String
         },
         costCar:{
             type:Number,
             required:true,
+        },
+        slug:{
+            type:String,
+            slug: 'nameCar',
+            unique:true
         }
     },
     {
         timestamps:true,
     }
 )
+mongoose.plugin(slug);
 module.exports=mongoose.model('products',ProductSchema);

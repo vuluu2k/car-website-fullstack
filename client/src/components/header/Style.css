@@ -9,7 +9,6 @@
     border-bottom: 2px solid #343A40;
 }
 .IconClass{
-    width: 180px;
     font-weight: bold;
 }
 .centerBar{
@@ -23,6 +22,14 @@
     font-size:25px;
     font-weight: bolder;
     color:#0C1B51;
+}
+.icon_link{
+    margin-right:5px;
+    color:#212529;
+    font-size: 14px;
+}
+.icon_link:hover{
+    color:red;
 }
 @media screen and (max-width:1182px) {
     .gps-bar{
