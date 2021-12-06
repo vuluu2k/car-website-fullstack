@@ -1,6 +1,7 @@
 import React from 'react';
 import { createContext,useReducer,useEffect } from 'react';
 import {apiUrl,LOCAL_STORAGE_ACCOUNT_NAME,SET_ACCOUNT,
+    ACCOUNT_CREATE_SUCCESS,
     ACCOUNT_LOAD_SUCCESS,
     ACCOUNT_LOAD_FAIL,
     ACCOUNT_UPDATE_SUCCESS,
@@ -70,6 +71,19 @@ const AccountContextProvider = ({children}) =>{
     }
     
 // --------------------------------------
+//[CREATE] ACCOUNTS
+const createAccount = async (accountForm)=>{
+    try {
+        const response=await axios.post(`${apiUrl}/accounts`,accountForm);
+        if(response.data.success){
+            dispatch({type:ACCOUNT_CREATE_SUCCESS,payload:response.data.account})
+            return response.data;
+        }
+    } catch (e) {
+        return e.response.data ? e.response.data:{success:false,message:'Lỗi Server'}
+    }
+}
+
 // [GET] ACCOUNTS
 
 const getAccount=async ()=>{

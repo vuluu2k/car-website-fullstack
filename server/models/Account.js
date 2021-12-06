@@ -9,7 +9,12 @@ const AccountSchema = new Schema(
         passwordAccount:{
             type: String,
             required:true
-        }
+         }
+        //,
+        // level:{
+        //     type:String,
+        //     enum:['admin','employ']
+        // }
     },
     {
         timestamps:true

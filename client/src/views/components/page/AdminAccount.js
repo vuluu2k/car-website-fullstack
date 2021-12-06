@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Table} from 'react-bootstrap';
 
 import './css/AdminAccount.css'
@@ -13,7 +13,6 @@ import { useContext, useEffect
 
 // ----------------------------------------------
 
-
 export default function AdminAccount() {
 // ---------------------------------
 
@@ -24,32 +23,55 @@ export default function AdminAccount() {
     },[]);
     console.log(accounts)
 
+//----
+    const [newAccount, setNewAccount] = useState({
+        nameAccount:'',
+        passAccount:'',
+    
+    })
+    const {nameAccount,passAccount}=newAccount;
+    const onChangeCreateAccountForm=event=>setNewAccount({
+        ...newAccount,
+        [event.target.name]:event.target.value,
+        
+    })
+
+//----
+
+    // const [data,setData]=useState(null);
+    // const [show,showData]=useState(false);
+    // function getData(val){
+    //     setData(val.target.value)
+    //     showData(false)
+    //     console.warn(val.target.value)
+    
+    // }
+    
 // ---------------------------------
     return (
         <div className="wrapper">
             
            <div className="content-wrap">
-               
+{/*                
+               <div>
+                   {
+                        show?
+                    <h1>{data}</h1>
+                        :null
+                   }
+               </div> */}
+
                 <div className='flex-item' >
                     <p>Tài khoản:</p> 
-                    <input type={'text' } id='hoten' placeholder='Tài khoản' ></input>
+                    <input type={'text' } id='hoten' placeholder='Tài khoản' value={nameAccount} name='nameAccount' onChange={onChangeCreateAccountForm}></input>
                  </div>
                  <div className='flex-item' >
                     <p>Mật khẩu: </p>
-                    <input type={'password' } id='hoten' placeholder='Mật khẩu' ></input>
+                    <input type={'password' } id='hoten' placeholder='Mật khẩu' value={passAccount} name='passAccount' onChange={onChangeCreateAccountForm} ></input>
                  </div>
 
-                 {/* <div className='flex-item' >
-                    <p>Họ tên:</p> 
-                    <input type={'text' } id='hoten' placeholder='Họ tên' ></input>
-                 </div> */}
-                 {/* <div className='flex-item' >
-                    <p>Số điện thoại: </p>
-                    <input type={'text' } id='hoten' placeholder='Số điện thoại' ></input>
-                 </div> */}
-
                 <div className='flex-btn'>
-                    <input id='btn-them' type={'button'} value={'Thêm'} ></input>
+                    <input id='btn-them' type={'button'} value={'Thêm'} onChange={onChangeCreateAccountForm} ></input>
                     <input id='btn-sua' type={'button'} value={'Cập nhật'} ></input>
                     <input id='btn-xoa' type={'button'} value={'Xóa'} ></input>
                 </div>
@@ -63,15 +85,14 @@ export default function AdminAccount() {
                         <th >Id</th>
                         <th >Tài khoản</th>
                         <th >Mật khẩu</th>
-                        {/* <th >Họ tên</th>
-                        <th >Số điện thoại</th> */}
+                      
                         
                     </tr>
                 </thead>
                 <tbody>
 
                     {accounts.map((item, index) =>(
-                            <tr key={item._id}> 
+                            <tr key={item._id} > 
                                 <td>
                                     { (index + 1 ) }
                                 </td>
