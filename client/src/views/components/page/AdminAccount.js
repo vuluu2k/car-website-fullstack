@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Table} from 'react-bootstrap';
+import {Table,Form,Button} from 'react-bootstrap';
 
 import './css/AdminAccount.css'
 // ----------------------------------------------
@@ -16,7 +16,7 @@ import { useContext, useEffect
 export default function AdminAccount() {
 // ---------------------------------
 
-    const {getAccount, accountState: {accounts} } = useContext(AccountContext)
+    const {getAccount, createAccount, accountState: {accounts} } = useContext(AccountContext)
     useEffect(() =>{
         getAccount()
         // eslint-disable-nest-line react-hooks/exhaustive-deps
@@ -24,59 +24,51 @@ export default function AdminAccount() {
     console.log(accounts)
 
 //----
+
     const [newAccount, setNewAccount] = useState({
         nameAccount:'',
-        passAccount:'',
+        passwordAccount:'',
     
     })
-    const {nameAccount,passAccount}=newAccount;
+    const {nameAccount,passwordAccount}=newAccount;
     const onChangeCreateAccountForm=event=>setNewAccount({
         ...newAccount,
         [event.target.name]:event.target.value,
         
     })
 
-//----
+    const onSubmit = async event =>{
+        event.preventDefault();
+       await createAccount(newAccount);
+        
 
-    // const [data,setData]=useState(null);
-    // const [show,showData]=useState(false);
-    // function getData(val){
-    //     setData(val.target.value)
-    //     showData(false)
-    //     console.warn(val.target.value)
-    
-    // }
-    
-// ---------------------------------
+    }
+
     return (
-        <div className="wrapper">
+        <div className="container">
             
-           <div className="content-wrap">
-{/*                
-               <div>
-                   {
-                        show?
-                    <h1>{data}</h1>
-                        :null
-                   }
-               </div> */}
+          
+           <Form.Group style={{margin:'20px'}}>
+                <Form.Text style={{fontSize:'15px'}}>Tài khoản: </Form.Text>
+                <Form.Control style={{margin:'5px'}} type='text' placeholder='Tài khoản' value={nameAccount} name='nameAccount' onChange={onChangeCreateAccountForm} required/>
+                </Form.Group>
+                <Form.Group style={{margin:'20px'}} className="mb-3" >
+                    <Form.Text style={{fontSize:'15px'}}>Mật kHẩu: </Form.Text>
+                    <Form.Control type='text' style={{margin:'5px'}} placeholder='Mật khẩu' value={passwordAccount} name='passwordAccount' onChange={onChangeCreateAccountForm} required/>
+                   
+                </Form.Group>
 
-                <div className='flex-item' >
-                    <p>Tài khoản:</p> 
-                    <input type={'text' } id='hoten' placeholder='Tài khoản' value={nameAccount} name='nameAccount' onChange={onChangeCreateAccountForm}></input>
-                 </div>
-                 <div className='flex-item' >
-                    <p>Mật khẩu: </p>
-                    <input type={'password' } id='hoten' placeholder='Mật khẩu' value={passAccount} name='passAccount' onChange={onChangeCreateAccountForm} ></input>
-                 </div>
+                <Button variant="primary" type="submit" onClick={onSubmit} style={{margin:'20px'}}>
+                    Thêm
+                </Button>
+                <Button variant="primary" type="submit"  style={{margin:'20px'}}>
+                    Sửa
+                </Button>
+                <Button variant="primary" type="submit"  style={{margin:'20px'}} >
+                    Xóa
+                </Button>
 
-                <div className='flex-btn'>
-                    <input id='btn-them' type={'button'} value={'Thêm'} onChange={onChangeCreateAccountForm} ></input>
-                    <input id='btn-sua' type={'button'} value={'Cập nhật'} ></input>
-                    <input id='btn-xoa' type={'button'} value={'Xóa'} ></input>
-                </div>
-
-           </div>
+           
 
            <Table  bordered hover size="sm">
            <thead >
@@ -86,7 +78,6 @@ export default function AdminAccount() {
                         <th >Tài khoản</th>
                         <th >Mật khẩu</th>
                       
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -109,7 +100,7 @@ export default function AdminAccount() {
                             </tr> 
                     
                     ))}
-{/* ------------------------------------------ */}
+
                 </tbody>
 
            </Table>

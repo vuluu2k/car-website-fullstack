@@ -103,7 +103,7 @@ const getAccount=async ()=>{
 // ------------------------------------------
 
 
-const accountContextData={accountState,loginAccount,logoutAccount,getAccount}
+const accountContextData={accountState,loginAccount,logoutAccount,getAccount,createAccount}
 return (
     <AccountContext.Provider value={accountContextData}>
         {children}
