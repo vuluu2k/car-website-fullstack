@@ -16,6 +16,7 @@ import CartModal from '../../components/modal/CartModal';
 import ToastQuote from '../../components/toast/ToastQuote';
 import ButtonModal from './ButtonModal';
 import {ProductContext} from '../../contexts/ProductContext';
+import {SilderContext} from '../../contexts/SilderContext';
 import {CartContext} from '../../contexts/CartContext';
 import {ConfirmContext} from '../../contexts/ConfirmContext';
 import {useContext,useEffect} from 'react';
@@ -26,6 +27,11 @@ export default function Loading({PageRoute}) {
     const {productState:{products,productsLoading},getProduct} = useContext(ProductContext);
     const {showConfirmDeleteProudctInCart:{show,productId},setShowConfirmDeleteProudctInCart}=useContext(ConfirmContext)
     const {deleteCart}= useContext(CartContext);
+    const {silderState:{image},getImage}=useContext(SilderContext);
+    useEffect(() => {
+        getImage()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [image])
     useEffect(()=>{
         getProduct()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,7 +53,7 @@ export default function Loading({PageRoute}) {
     }
     body=(
         <>
-            {PageRoute==='home' &&<Home products={products} />}
+            {PageRoute==='home' &&<Home products={products} image={image} />}
             {PageRoute==='introduce' &&<Introduce />}
             {PageRoute==='products' &&<Products />}
             {PageRoute==='news' &&<News />}
@@ -63,7 +69,7 @@ export default function Loading({PageRoute}) {
         <>
             <Header products={products} />
                 {body}
-            <Footer products={products} />
+            <Footer products={products} image={image} />
             <ToastQuote />
             <QuoteModal />
             <CartModal />

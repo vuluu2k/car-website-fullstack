@@ -88,7 +88,6 @@ class ProductController{
             consumptionCar,TypeCar,maxPowerCar,
             costCar}=req.body;
         const product= await Product.findById({_id:req.params.id});
-        console.log(product);
         if(!nameCar)
             return res.status(400)
                         .json({success:false,message:'Tên sản phẩm là bắt buộc'});

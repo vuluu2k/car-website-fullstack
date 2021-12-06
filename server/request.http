@@ -1,4 +1,38 @@
+# ----------------------------SILDER-----------------------------------
 
+
+# Xem ảnh hiện đang có
+GET http://localhost:5000/api/silders
+###
+# Xem ảnh chi tiết
+GET http://localhost:5000/api/silders/61add96464318d645ae93ff3
+###
+# Tạo một ảnh
+POST http://localhost:5000/api/silders
+Content-Type: application/json
+
+{
+    "image":"http://hyundaimotorvn.com/wp-content/uploads/2019/04/113.png",
+    "kind":"footer"
+}
+
+###
+# Sưa một ảnh
+PUT http://localhost:5000/api/silders/61ae4cf44255bbe3bb2d0f81
+Content-Type: application/json
+
+{
+    "image":"http://hyundaimotorvn.com/wp-content/uploads/2019/12/2-1.jpg",
+    "kind":"header"
+}
+
+
+###
+#Xóa một ảnh
+DELETE http://localhost:5000/api/silders/61ad9ed4e58f8ba6ce13cf22
+###
+
+# Xem toàn bộ sản phẩm
 GET http://localhost:5000/api/products
 
 ###
@@ -56,7 +90,7 @@ Content-Type: application/json
     "updatedAt": "2021-10-21T17:53:18.197Z",
     "slug": "hyundai-kona-2021",
     "__v": 0
-  }
+}
 
 ###
 # Tạo đăng kí báo giá

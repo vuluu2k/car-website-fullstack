@@ -1,6 +1,6 @@
 import React from 'react'
 import {Pagination} from 'react-bootstrap'
-export default function PaginationCus({ productsPerPage, totalProducts, paginate,currentPage }) {
+export default function PaginationProduct({ productsPerPage, totalProducts, paginate,currentPage }) {
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
@@ -12,6 +12,12 @@ export default function PaginationCus({ productsPerPage, totalProducts, paginate
         }
         paginate(currentPage-1)
     }
+    const nextHandler = ()=>{
+        if(currentPage === pageNumbers.length){
+            return
+        }
+        paginate(currentPage+1)
+    }
     return (
         <div>
             <Pagination>
@@ -20,7 +26,7 @@ export default function PaginationCus({ productsPerPage, totalProducts, paginate
                 {pageNumbers.map(number => (
                     <Pagination.Item key={number} onClick={()=>paginate(number)} active={number===currentPage?true:false}>{number}</Pagination.Item>
                 ))}
-                <Pagination.Next />
+                <Pagination.Next onClick={nextHandler} />
                 <Pagination.Last onClick={()=>paginate(pageNumbers.length)}/>
             </Pagination>
         </div>

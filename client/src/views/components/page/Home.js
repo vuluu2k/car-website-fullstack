@@ -4,10 +4,10 @@ import ControlledCarousel from '../../../components/carousel/ControlledCarousel'
 import PleaseBuyACar from '../content/home/PleaseBuyACar';
 import LineCarView from '../content/home/LineCarView';
 import ContentCard from '../../../components/card/ContentCard';
-export default function Home({products}) {
+export default function Home({products,image}) {
     return (
         <>
-            <ControlledCarousel />
+            <ControlledCarousel image={image} />
             <Container style={{padding:'36px 0'}}>
                 <div  className="TitleCar d-flex">
                     <div style={{textAlign:'center',textTransform:'uppercase',fontSize:'19px',margin:'auto',fontWeight:'bold'}}>

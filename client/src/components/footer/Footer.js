@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom';
 import './Style.css'
 import Map from '../map/Map';
 
-export default function Footer({products}) {
+export default function Footer({products,image}) {
     return (
         <>
             <Container >
-                <FooterCarousel />
+                <FooterCarousel image={image} />
             </Container>
             <Container fluid style={{backgroundColor: '#191919'}} className="text-white"> 
                 <Container>

@@ -78,7 +78,6 @@ const ProductContextProvider = ({children})=>{
     const deleteProduct=async (productId)=>{
         try {
             const response=await axios.delete(`${apiUrl}/products/${productId}`)
-            console.log(response.data)
             if(response.data.success){
                 dispatch({type:DELETE_PRODUCT_SUCESS,payload:productId})
             }
