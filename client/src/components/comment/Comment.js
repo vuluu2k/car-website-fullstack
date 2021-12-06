@@ -101,10 +101,7 @@ export default function Comment() {
                     Gửi
                  </Button>
                  
-               </div>
-              
-               
-               
+               </div>     
           }
           
           {
