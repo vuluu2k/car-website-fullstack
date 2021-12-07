@@ -20,9 +20,12 @@ export default function UpdateNewModal() {
 
   const [previewSource, setPreviewSource] = useState();
   const [stateNew, setStateNew] = useState({
-    contentNew: EditorState.createEmpty(),
-  });
-  const { titleNew } = updateNew;
+    contentNew: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(newTT.contentNew).contentBlocks)),
+  })
+  useEffect(()=>setStateNew({
+    contentNew: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(newTT.contentNew).contentBlocks)),
+  }),[newTT.contentNew])
+  const { titleNew, imageNewUrl } = updateNew;
 
   const onChangeUpdateNewForm = (event) =>
     setUpdateNew({
@@ -38,7 +41,7 @@ export default function UpdateNewModal() {
       contentNew: draftToHtml(convertToRaw(contentNew.getCurrentContent())),
     });
   };
-  const { contentNew , imageNewUrl} = stateNew;
+  const { contentNew } = stateNew;
   const handleClose = () => {
     setShowUpdateNew(false);
     setUpdateNew(newTT);

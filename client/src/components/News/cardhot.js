@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import parse from 'html-react-parser';
 
 export default function cardnew({product}) {
 
@@ -14,7 +15,7 @@ export default function cardnew({product}) {
                     <Card.Title>{product.titleNew}</Card.Title>
                 </Link>
                 <Card.Text>
-                     {product.contentNew.slice(0, 250) + "..."}
+                     {parse(product.contentNew.slice(0, 250) + "...")}
                 </Card.Text>
             </Card.Body>
             <Card.Footer>

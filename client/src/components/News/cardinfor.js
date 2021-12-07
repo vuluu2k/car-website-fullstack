@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import {Card, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import parse from 'html-react-parser';
 
 export default function cardinfor({product}) {
 
@@ -11,7 +12,7 @@ export default function cardinfor({product}) {
             <Card.Img variant="top" src={product.imageNewUrl} />
             <Card.Body>
             <Card.Text>
-                {product.contentNew.slice(0, 250) + "..."}
+                {parse(product.contentNew.slice(0, 250) + "...")}
             </Card.Text>
             <Button variant="outline-danger" to={`/news/${product._id}`}  as={Link}><strong>Xem chi tiết <i class="fas fa-chevron-right"></i></strong></Button>
             </Card.Body>

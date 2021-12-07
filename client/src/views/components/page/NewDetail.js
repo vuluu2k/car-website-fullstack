@@ -2,7 +2,8 @@ import React from 'react'
 import {Container,Row,Col, Card} from 'react-bootstrap';
 import CardLeft from '../../../components/News/cardleft';
 import CardLH from '../../../components/News/cardlh';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 export default function NewDetail({news}) {
    const {id} = useParams()
@@ -24,7 +25,7 @@ export default function NewDetail({news}) {
                         <Card.Img variant="top" src={NewId.imageNewUrl} />
                         <Card.Body>
                         <Card.Text>
-                        {NewId.contentNew}
+                        {parse(NewId.contentNew)}
                         </Card.Text>
                         
                         </Card.Body>
