@@ -8,6 +8,7 @@ import Installment from '../components/page/Installment';
 import PriceList from '../components/page/PriceList';
 import Contact from '../components/page/Contact';
 import Cart from '../components/page/Cart';
+import Pay from '../components/page/Pay';
 import ProductDetail from '../components/page/ProductDetail';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -16,6 +17,7 @@ import CartModal from '../../components/modal/CartModal';
 import ToastQuote from '../../components/toast/ToastQuote';
 import ButtonModal from './ButtonModal';
 import {ProductContext} from '../../contexts/ProductContext';
+import {NewContext} from '../../contexts/NewContext';
 import {CartContext} from '../../contexts/CartContext';
 import {ConfirmContext} from '../../contexts/ConfirmContext';
 import {useContext,useEffect} from 'react';
@@ -24,12 +26,17 @@ import ConfirmModal from '../../components/modal/ConfirmModal';
 
 export default function Loading({PageRoute}) {
     const {productState:{products,productsLoading},getProduct} = useContext(ProductContext);
+    const {newState:{news},getNew} = useContext(NewContext);
     const {showConfirmDeleteProudctInCart:{show,productId},setShowConfirmDeleteProudctInCart}=useContext(ConfirmContext)
     const {deleteCart}= useContext(CartContext);
     useEffect(()=>{
         getProduct()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[products]);
+    useEffect(()=>{
+        getNew()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[news]);
     const handleClickDelete = ()=>{
         deleteCart(productId)
         handleClose()
@@ -51,11 +58,12 @@ export default function Loading({PageRoute}) {
             {PageRoute==='introduce' &&<Introduce />}
             {PageRoute==='products' &&<Products />}
             {PageRoute==='news' &&<News />}
-            {PageRoute==='newDetail' &&<NewDetail />}
+            {PageRoute==='newDetail' &&<NewDetail news={news}/>}
             {PageRoute==='installment' &&<Installment />}
             {PageRoute==='pricelist' &&<PriceList />}
             {PageRoute==='contact' &&<Contact />}
             {PageRoute==='cart' &&<Cart />}
+            {PageRoute==='pay' &&<Pay />}
             {PageRoute==='productDetail' &&<ProductDetail products={products} productsLoading={productsLoading} />}
         </>
     )

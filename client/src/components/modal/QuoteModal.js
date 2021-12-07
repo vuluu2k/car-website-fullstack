@@ -40,7 +40,7 @@ export default function QuoteModal() {
                     <Form.Control type='text' placeholder='Số điện thoại' value={phoneQuote} name='phoneQuote' onChange={onChangeCreateQuoteForm} required/>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Control as='select' value={product} name='product' onChange={onChangeCreateQuoteForm}>
+                    <Form.Control as='select' value={product} name='product' onChange={onChangeCreateQuoteForm} required>
                         <option value="">--Chọn sản phẩm muốn nhận báo giá--</option>
                         {products.map(product=>(
                           <option value={product._id} key={product._id}>{product.nameCar}</option>

@@ -79,7 +79,7 @@ export default function Home({products}) {
 
                     {news.map(item => (
                             <Col key={item._id}>
-                                <CardHot title={item.titleNew} src={item.imageNewUrl} content={item.contentNew} time={item.createdAt}/>
+                                <CardHot product={item}/>
                             </Col>
                         
                         ))}

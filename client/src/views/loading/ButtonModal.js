@@ -3,10 +3,18 @@ import {OverlayTrigger,Tooltip} from 'react-bootstrap'
 import {useContext} from 'react';
 import {QuoteContext} from '../../contexts/QuoteContext';
 import {CartContext} from '../../contexts/CartContext';
-
+import './Style.css'
 export default function ButtonModal() {
     const {setShowQuote}= useContext(QuoteContext);
-    const {setShowCart}= useContext(CartContext);
+    const {setShowCart,getCart}= useContext(CartContext);
+    const carts=getCart();
+    const quantitys=()=>{
+        let sum=0;
+        carts.forEach(c =>{
+            sum+=c.quantity
+        })
+        return sum
+    }
     return (
         <>
             <OverlayTrigger
@@ -31,7 +39,8 @@ export default function ButtonModal() {
                     </Tooltip>
                 }
             >
-                <button className='btn-floating-cart' variant='dark' onClick={()=>setShowCart(true)}>
+                <button className='btn-floating-cart btn_cart' variant='dark' onClick={()=>setShowCart(true)}>
+                    <div className="count_cart d-flex justify-content-center align-items-center">{quantitys()}</div>
                     <i className="fas fa-shopping-cart text-white" style={{marginRight:'2px'}}></i>
                 </button>
             </OverlayTrigger>

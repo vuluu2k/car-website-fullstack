@@ -1,107 +1,110 @@
 const New = require('../models/News');
+const { cloudinary } = require('../utils/cloudinary');
 
 class NewsController {
 
-    async getNew(req, res){
+    async getNew(req, res) {
         try {
-            const news= await New.find({});
-            
-           
-            
-            res.json({success: true, news})
+            const news = await New.find({});
+            res.json({ success: true, news })
         } catch (e) {
             console.log(e);
             res.status(500)
-                .json({success: false,message:'Lỗi máy chủ nội bộ'});
+                .json({ success: false, message: 'Lỗi máy chủ nội bộ' });
         }
     }
-    async getNewDetail(req,res){
+    async getNewDetail(req, res) {
         try {
-            const news=await New.findOne({_id:req.params.id})
-            res.json({success:true,news})
+            const news = await New.findOne({ _id: req.params.id })
+            res.json({ success: true, news })
         } catch (e) {
             console.log(e);
             res.status(500)
-                .json({success:false ,message:'Lỗi máy chủ nội bộ'})
+                .json({ success: false, message: 'Lỗi máy chủ nội bộ' })
         }
     }
 
-    async createNew(req,res){
-        const{titleNew,
-            contentNew,imageNewUrl,
+    async createNew(req, res) {
+        const {
+            titleNew,
+            contentNew,
+            imageNewUrl,
             imageNewId
-            }=req.body; 
-        if(!titleNew)
+        } = req.body;
+        if (!titleNew)
             return res.status(400)
-                        .json({success: false,message:'tiêu đề bài viết là bắt buộc'});
-                        // [Valiodation] Làm bên font-end
+                .json({ success: false, message: 'tiêu đề bài viết là bắt buộc' });
+        // [Valiodation] Làm bên font-end
         try {
-            const uploadedResponse = await cloudinary.uploader.upload(imageNewUrl,{
-                upload_preset:'imgCar',
-                eager:{ width: 900, height: 500, crop: "pad" }, 
+            const uploadedResponse = await cloudinary.uploader.upload(imageNewUrl, {
+                upload_preset: 'imgCar',
+                eager: { width: 900, height: 500, crop: "pad" },
             })
             console.log(uploadedResponse);
-            const newNew=new New({
-                titleNew,imageNewId:uploadedResponse.public_id,
-                imageNewUrl:uploadedResponse.eager[0].url,
+            const newNew = new New({
+                titleNew,
+                imageNewId: uploadedResponse.public_id,
+                imageNewUrl: uploadedResponse.eager[0].url,
                 contentNew
             })
             await newNew.save();
-            res.json({success:true,message:'Chúc mừng bạn thêm thành công!',new:newNew});
+            res.json({ success: true, message: 'Chúc mừng bạn thêm thành công!', new: newNew });
         } catch (e) {
             console.log(e);
             res.status(500)
-                .json({success:false ,message:'Lỗi máy chủ nội bộ'})
+                .json({ success: false, message: 'Lỗi máy chủ nội bộ' })
         }
     }
     async updateNew(req, res) {
-        const{
+        const {
             titleNew,
-            contentNew,imageNewUrl,
+            contentNew,
+            imageNewUrl,
             imageNewId
-        }=req.body;
-        const news= await New.findById({_id:req.params.id});
+        } = req.body;
+        const news = await New.findById({ _id: req.params.id });
         console.log(news);
-        if(!titleNew)
+        if (!titleNew)
             return res.status(400)
-                        .json({success:false,message:'Tiêu đề bài viết là bắt buộc'});
+                .json({ success: false, message: 'Tiêu đề bài viết là bắt buộc' });
         try {
-            const uploadedResponse =await cloudinary.uploader.upload(imageNewUrl,{
-                public_id:product.imageNewId,
-                overwrite:true,
-                eager:{ width: 900, height: 500, crop: "pad" }, 
+            const uploadedResponse = await cloudinary.uploader.upload(imageNewUrl, {
+                public_id: news.imageNewId,
+                overwrite: true,
+                eager: { width: 900, height: 500, crop: "pad" },
             })
-            let updateNew={
-                titleNew,imageNewId:uploadedResponse.public_id,
-                imageNewUrl:uploadedResponse.eager[0].url,
+            let updateNew = {
+                titleNew,
+                imageNewId: uploadedResponse.public_id,
+                imageNewUrl: uploadedResponse.eager[0].url,
                 contentNew
             }
-            const productUpdateCondition={_id:req.params.id}
-            updateNew= await New.findOneAndUpdate(productUpdateCondition,updateNew,{news:true});
-            if(!updateNew){
-                return res.status(401).json({success:false, message:'Bài viết này không tồn tại'})
+            const newUpdateCondition = { _id: req.params.id }
+            updateNew = await New.findOneAndUpdate(newUpdateCondition, updateNew, { news: true });
+            if (!updateNew) {
+                return res.status(401).json({ success: false, message: 'Bài viết này không tồn tại' })
             }
-            res.json({success:true, message:'Cập nhật thành công',news:updateNew})
+            res.json({ success: true, message: 'Cập nhật thành công', news: updateNew })
         } catch (e) {
             console.log(e);
             res.status(500)
-                .json({success:false ,message:'Lỗi máy chủ nội bộ'})
+                .json({ success: false, message: 'Lỗi máy chủ nội bộ' })
         }
     }
-    async deleteNew(req, res){
+    async deleteNew(req, res) {
         try {
-            const newDeleteCondition={_id:req.params.id};
-            const news= await New.findById({_id:req.params.id});
-            const deleteNew= await New.findOneAndDelete(newDeleteCondition);
-            if(!deleteNew)
+            const newDeleteCondition = { _id: req.params.id };
+            const news = await New.findById({ _id: req.params.id });
+            const deleteNew = await New.findOneAndDelete(newDeleteCondition);
+            if (!deleteNew)
                 return res.status(401)
-                            .json({success:false,message:'Bài viết này không tồn tại'});
+                    .json({ success: false, message: 'Bài viết này không tồn tại' });
             await cloudinary.uploader.destroy(`${news.imageNewId}`)
-            res.json({success:true,message:'Xoá thành công',news:deleteNew})
+            res.json({ success: true, message: 'Xoá thành công', news: deleteNew })
         } catch (e) {
             console.log(e);
             res.status(500)
-                .json({success:false ,message:'Lỗi máy chủ nội bộ'})
+                .json({ success: false, message: 'Lỗi máy chủ nội bộ' })
         }
     }
 }

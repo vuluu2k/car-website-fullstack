@@ -2,16 +2,11 @@ import React from 'react'
 import {Container,Row,Col, Card} from 'react-bootstrap';
 import CardLeft from '../../../components/News/cardleft';
 import CardLH from '../../../components/News/cardlh';
-import {NewContext} from '../../../contexts/NewContext'
-import {useContext,useEffect} from 'react';
+import { useParams } from 'react-router-dom'
 
-export default function NewDetail(props) {
-    const {getNew, newState:{news}} = useContext(NewContext)
-
-    useEffect(()=>{
-        getNew()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[news]);
+export default function NewDetail({news}) {
+   const {id} = useParams()
+   const NewId=news.find(n=>n._id===id)
 
     return (
         <Container style={{padding:'36px 0'}}>
@@ -24,13 +19,12 @@ export default function NewDetail(props) {
                     <hr style={{borderBottom:'4px solid',width:'25%',color:'rgb(255, 11, 11)'}}/>
 
                     <Card className="mt-5 container" style={{border:0}}>
-                        <h4>{props.title}</h4>
-                        <p>{props.time}</p>
-                        <Card.Img variant="top" src="http://hyundaimotorvn.com/wp-content/uploads/2019/12/cam-bien-lui.jpg" />
+                        <h4>{NewId.titleNew}</h4>
+                        <p>{NewId.createdAt}</p>
+                        <Card.Img variant="top" src={NewId.imageNewUrl} />
                         <Card.Body>
                         <Card.Text>
-                            Với nguyên tắc chính để lùi được xe là giữ hướng thân xe chính xác theo hướng muốn di chuyển,
-                                nhưng không phải cứ nghĩ thế là làm được. Do bánh dẫn hướng nằm ở phía đầu xe, người tài xế lại bị khuất tầm nhìn, tồn tại nhiều điểm mù, nên muốn đưa chiếc […]
+                        {NewId.contentNew}
                         </Card.Text>
                         
                         </Card.Body>
@@ -44,7 +38,7 @@ export default function NewDetail(props) {
                     <Card.Body>
                     {news.map(item => (
                         <div key={item._id}>
-                            <CardLeft src={item.imageNewUrl} content={item.titleNew} />
+                            <CardLeft product={item} />
                         </div>
                     ))}
                      </Card.Body>
