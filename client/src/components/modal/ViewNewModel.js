@@ -40,18 +40,16 @@ export default function ViewNewModal() {
                 <div>
                     <Card border="light" style={{ width: '100%' }}>
                         <Row>
-                            <Col xs="12" md="7">
+                            <Col xs="12" md="6">
                                 <Card.Img variant="top" src={newTT.imageNewUrl} />
                             </Col>
-                            <Col xs="12" md="5">
-                                <Card.Body>
-                                    <Card.Title style={{ textTransform:'uppercase'}}>{newTT.titleNew}</Card.Title>
-                                    <Card.Text >
-                                        {parse(newTT.contentNew)}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Col>
+                            <Card.Title xs="12" md="6" style={{ textTransform:'uppercase'}}>{newTT.titleNew}</Card.Title>
                         </Row>
+                        <Card.Body classNames="mt-4">
+                            <Card.Text >
+                                {parse(newTT.contentNew)}
+                            </Card.Text>
+                        </Card.Body>
                     </Card>
                 </div>
             </Modal.Body>
