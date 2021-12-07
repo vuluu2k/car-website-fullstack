@@ -8,6 +8,7 @@ import PriceList from '../components/page/PriceList';
 import Contact from '../components/page/Contact';
 import Cart from '../components/page/Cart';
 import Pay from '../components/page/Pay';
+import Confirm from '../components/page/Confirm';
 import ProductDetail from '../components/page/ProductDetail';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -62,6 +63,7 @@ export default function Loading({PageRoute}) {
             {PageRoute==='contact' &&<Contact />}
             {PageRoute==='cart' &&<Cart />}
             {PageRoute==='pay' &&<Pay />}
+            {PageRoute==='confirm' &&<Confirm />}
             {PageRoute==='productDetail' &&<ProductDetail products={products} productsLoading={productsLoading} />}
         </>
     )

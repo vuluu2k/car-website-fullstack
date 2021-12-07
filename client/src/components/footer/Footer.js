@@ -87,7 +87,7 @@ export default function Footer({products,image}) {
             </Container>
             <div style={{height:'40px',backgroundColor:'red'}} className="d-flex justify-content-center align-items-center">
                 <div className="font-weight-boler text-white">
-                    Designed By Lưu Công Quang Vũ - Imformation Technology Of HaUi
+                    Copyright &copy; Lưu Công Quang Vũ - Imformation Technology Of HaUi
                 </div>
             </div>
         </>

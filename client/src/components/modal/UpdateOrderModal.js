@@ -1,79 +1,49 @@
 import React,{
     useContext,
-    useState
+    useState,useEffect
 } from 'react'
-import {
-    Row,Col,Container,
-    Form,Table,Button
-} from 'react-bootstrap';
-import {CartContext} from '../../../contexts/CartContext';
-import {PayContext} from '../../../contexts/PayContext';
-import formatToCurrency from '../../../middleware/NumberToVND'
-import {useHistory} from 'react-router-dom'
-import './css/Pay.css'
-export default function Pay() {
-    const history = useHistory()
-    const{getCart,clearCart} = useContext(CartContext);
-    const{createOrder} = useContext(PayContext);
-    const carts=getCart();
-    const [newOrder,setNewOrder]=useState({
-        firstName:'',
-        lastName:'',
-        company:'',
-        nation:'',
-        address:'',
-        codeZip:'',
-        city:'',
-        numberPhone:'',
-        email:'',
-        note:'',
-        pay:'',
-        check:false,
-        cart:carts
-    })
+import {Modal,Form,Row,Col,Button} from 'react-bootstrap'
+import {PayContext} from '../../contexts/PayContext'
+
+export default function UpdateOrderModal() {
+    const {orderState:{order},showUpdate,setShowUpdate,updateOrder} = useContext(PayContext);
+    const [upOrder,setUpOrder]=useState(order)
+    useEffect(()=>setUpOrder(order),[order])
     const {
         firstName,lastName,
         company,nation,address,
         codeZip,city,numberPhone,
         email,note
-    }=newOrder
-    const onChangeCreateOrderForm=event=>setNewOrder({
-        ...newOrder,
+    }=upOrder
+    const onChangeCreateOrderForm=event=>setUpOrder({
+        ...upOrder,
         [event.target.name]:event.target.value
     })
+    const handleClose =()=>{
+        setUpOrder(order)
+        setShowUpdate(false)
+    }
     const onSubmitOrderForm=async event=>{
         event.preventDefault();
-        await createOrder(newOrder)
-        clearCart()
-        setNewOrder({
-            firstName:'',
-            lastName:'',
-            company:'',
-            nation:'',
-            address:'',
-            codeZip:'',
-            city:'',
-            numberPhone:'',
-            email:'',
-            note:'',
-            pay:''
-        })
-        history.push('/confirm')
-    }
-    const sumMoney=()=>{
-        let sum =0 ;
-        carts!==null&&carts.forEach(cart=>{
-            sum+=cart.product.costCar*cart.quantity;
-        })
-        return sum;
+        await updateOrder(upOrder)
+        handleClose()
     }
     return (
-        <Container style={{padding:'36px 0'}}>
-            <Form>
-                <Row>
-                    <Col xs={12} lg={7}>
-                        <div className="title_pay ">THÔNG TIN THANH TOÁN</div>
-                        <Row>
+        <div>
+            <Modal
+                size="lg"
+                show={showUpdate}
+                onHide={handleClose}
+                aria-labelledby="example-modal-sizes-title-sm"
+            >
+                <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-sm">
+                    Sửa thông tin đặt hàng
+                </Modal.Title>
+                </Modal.Header>
+                <Form>
+                    <Modal.Body>
+                    <Row>
                             <Col>
                                 <Form.Group>
                                     <Form.Label className="font_pay">Tên*</Form.Label>
@@ -157,58 +127,17 @@ export default function Pay() {
                                 </Form.Group>
                             </Col>
                         </Row>
-                    </Col>
-                    <Col xs={12} lg={5}>
-                        <div className="d-flex" style={{border:'1px solid red'}}>
-                            <Table borderless style={{width:'95%',margin:'auto'}}>
-                                <thead>
-                                    <tr>
-                                        <th>ĐƠN HÀNG CỦA BẠN</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Sản phẩm</th>
-                                        <th>Tổng số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody className=" font-weight-bolder">
-                                    {
-                                        (carts&&carts.length!==0)?carts.map(cart=>(
-                                            <tr key={cart.product._id}>
-                                                <td>{cart.product.nameCar} x {cart.quantity}</td>
-                                                <td className=" text-red">{formatToCurrency(cart.quantity*cart.product.costCar)}<sup>₫</sup></td>
-                                            </tr>
-                                        )): 
-                                        <tr>
-                                            <td>Bạn chưa có xe nào trong giỏ hàng</td>
-                                        </tr>
-                                    }
-                                    <tr style={{borderBottom:'2px solid #E3E3E3'}}>
-                                        <td>Tổng phụ</td>
-                                        <td className="text-red">{formatToCurrency(sumMoney())}<sup>₫</sup></td>
-                                    </tr>
-                                    <tr style={{borderBottom:'2px solid #E3E3E3'}}>
-                                        <td>Tổng</td>
-                                        <td className="text-red">{formatToCurrency(sumMoney())}<sup>₫</sup></td>
-                                    </tr>
-                                    <tr >
-                                        <th colSpan="2" style={{padding:"12px 0"}}>
-                                            <Button onClick={onSubmitOrderForm} variant="dark" style={{width:'100%',fontWeight:'600'}}>THANH TOÁN</Button>
-                                        </th>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </div>
-                        <div className="mt-2" style={{border:'1px solid red'}}>
-                            <div className="m-2">
-                                <h6>LƯU CHỌN LOẠI HÌNH THỨC THANH TOÁN</h6>
-                                <Form.Check label="CHUYỂN QUA TÀI KHOẢN NGÂN HÀNG"  value="payOnline" onChange={onChangeCreateOrderForm} type="radio" name="pay" />
-                                <Form.Check label="ĐẶT HÀNG THANH TOÁN TẠI CỬA HÀNG"  value="payOffline" onChange={onChangeCreateOrderForm}  type="radio" name="pay" />
-                            </div>
-
-                        </div>
-                    </Col>
-                </Row>
-            </Form>
-        </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="primary" onClick={onSubmitOrderForm}>
+                            Cập nhật
+                        </Button>
+                        <Button variant="danger" onClick={handleClose} >
+                            Quay lại
+                        </Button>
+                    </Modal.Footer>
+                </Form>
+            </Modal>
+        </div>
     )
 }

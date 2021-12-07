@@ -13,12 +13,12 @@ export default function ControlledCarousel({image}) {
     return (
       <Carousel activeIndex={index} onSelect={handleSelect}>
         {
-          imageHeader.map(img=>(
-            <Carousel.Item>
+          imageHeader.map((img,index)=>(
+            <Carousel.Item key={img._id}>
                 <img
                   className="d-block w-100"
                   src={img.imgUrl}
-                  alt="Second slide"
+                  alt={index+1}
                 />
             </Carousel.Item>
           ))
