@@ -9,6 +9,10 @@ const ConfirmContextProvider= ({children})=>{
         show:false,
         quoteId:''
     });
+    const [showConfirmDeleteComment,setShowConfirmDeleteComment]=useState({
+        show:false,
+        commentId:''
+    });
     const [showConfirmDeleteProudctInCart,setShowConfirmDeleteProudctInCart]=useState({
         show:false,
         productId:''
@@ -17,6 +21,7 @@ const ConfirmContextProvider= ({children})=>{
     const confirmContextData={
         showConfirmLogout,setShowConfirmLogout,
         showConfirmDeleteQuote,setShowConfirmDeleteQuote,
+        showConfirmDeleteComment,setShowConfirmDeleteComment,
         showConfirmDeleteProudctInCart,setShowConfirmDeleteProudctInCart
     };
     return(

@@ -23,11 +23,13 @@ import CartContextProvider from "./contexts/CartContext";
 import ProductContextProvider from "./contexts/ProductContext";
 import NewContextProvider from "./contexts/NewContext";
 import ScrollToTop from "./components/scroll/ScrollToTop";
+import CommentContextProvider from './contexts/CommentContext';
 function App() {
   return (
     <AccountContextProvider>
       <ConfirmContextProvider>
         <QuoteContextProvider>
+          <CommentContextProvider>
             <CartContextProvider>
               <NewContextProvider>
                 <ProductContextProvider>
@@ -68,6 +70,7 @@ function App() {
                 </ProductContextProvider>
                 </NewContextProvider>
               </CartContextProvider>
+          </CommentContextProvider>
           </QuoteContextProvider>
       </ConfirmContextProvider>
     </AccountContextProvider>
