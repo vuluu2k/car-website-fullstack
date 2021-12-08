@@ -9,6 +9,7 @@ import PriceList from '../components/page/PriceList';
 import Contact from '../components/page/Contact';
 import Cart from '../components/page/Cart';
 import Pay from '../components/page/Pay';
+import Confirm from '../components/page/Confirm';
 import ProductDetail from '../components/page/ProductDetail';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
@@ -17,6 +18,7 @@ import CartModal from '../../components/modal/CartModal';
 import ToastQuote from '../../components/toast/ToastQuote';
 import ButtonModal from './ButtonModal';
 import {ProductContext} from '../../contexts/ProductContext';
+import {SilderContext} from '../../contexts/SilderContext';
 import {NewContext} from '../../contexts/NewContext';
 import {CartContext} from '../../contexts/CartContext';
 import {ConfirmContext} from '../../contexts/ConfirmContext';
@@ -29,6 +31,11 @@ export default function Loading({PageRoute}) {
     const {newState:{news},getNew} = useContext(NewContext);
     const {showConfirmDeleteProudctInCart:{show,productId},setShowConfirmDeleteProudctInCart}=useContext(ConfirmContext)
     const {deleteCart}= useContext(CartContext);
+    const {silderState:{image},getImage}=useContext(SilderContext);
+    useEffect(() => {
+        getImage()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [image])
     useEffect(()=>{
         getProduct()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,7 +61,7 @@ export default function Loading({PageRoute}) {
     }
     body=(
         <>
-            {PageRoute==='home' &&<Home products={products} />}
+            {PageRoute==='home' &&<Home products={products} image={image} />}
             {PageRoute==='introduce' &&<Introduce />}
             {PageRoute==='products' &&<Products />}
             {PageRoute==='news' &&<News />}
@@ -64,6 +71,7 @@ export default function Loading({PageRoute}) {
             {PageRoute==='contact' &&<Contact />}
             {PageRoute==='cart' &&<Cart />}
             {PageRoute==='pay' &&<Pay />}
+            {PageRoute==='confirm' &&<Confirm />}
             {PageRoute==='productDetail' &&<ProductDetail products={products} productsLoading={productsLoading} />}
         </>
     )
@@ -71,7 +79,7 @@ export default function Loading({PageRoute}) {
         <>
             <Header products={products} />
                 {body}
-            <Footer products={products} />
+            <Footer products={products} image={image} />
             <ToastQuote />
             <QuoteModal />
             <CartModal />

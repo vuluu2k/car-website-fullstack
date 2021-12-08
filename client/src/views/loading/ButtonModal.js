@@ -10,7 +10,7 @@ export default function ButtonModal() {
     const carts=getCart();
     const quantitys=()=>{
         let sum=0;
-        carts.forEach(c =>{
+        carts!==null&&carts.forEach(c =>{
             sum+=c.quantity
         })
         return sum

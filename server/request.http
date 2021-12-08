@@ -1,4 +1,109 @@
+# ----------------------------SILDER-----------------------------------
 
+
+# Xem ảnh hiện đang có
+GET http://localhost:5000/api/silders
+###
+# Xem ảnh chi tiết
+GET http://localhost:5000/api/silders/61add96464318d645ae93ff3
+###
+# Tạo một ảnh
+POST http://localhost:5000/api/silders
+Content-Type: application/json
+
+{
+    "image":"http://hyundaimotorvn.com/wp-content/uploads/2019/04/113.png",
+    "kind":"footer"
+}
+
+###
+# Sưa một ảnh
+PUT http://localhost:5000/api/silders/61ae4cf44255bbe3bb2d0f81
+Content-Type: application/json
+
+{
+    "image":"http://hyundaimotorvn.com/wp-content/uploads/2019/12/2-1.jpg",
+    "kind":"header"
+}
+
+
+###
+#Xóa một ảnh
+DELETE http://localhost:5000/api/silders/61ad9ed4e58f8ba6ce13cf22
+
+
+# -----------------------------------------ĐẶT HÀNG----------------------------------------------------
+###
+# Đặt hàng
+POST http://localhost:5000/api/orders
+Content-Type: application/json
+
+{
+    "firstName":"Vũ",
+    "lastName":"Lưu Công Quang",
+    "company":"Thực hiện ươc mơ xa",
+    "nation":"China",
+    "address":"120kg",
+    "indexCar":"Tiêu chuẩn iOS",
+    "codeZip":"28000000",
+    "city":"NamDinh",
+    "numberPhone":"28000000",
+    "email":"28000000",
+    "note":"28000000",
+    "pay":"payOnline",
+    "cart":[
+        {
+          "product": {
+            "_id": "6171a90e6931fc5cf2481852",
+            "nameCar": "HYUNDAI KONA 2021",
+            "imgCarUrl": "http://res.cloudinary.com/vuluu/image/upload/c_pad,h_500,w_900/v1635056029/CarProject/imgCar/b7x3nmotf6pa4vy4bkzu.png",
+            "specicalCar": "-Kích thước tổng thể (DxRxC) (mm)4.165 x 1.800 x 1.565\n-Chiều dài cơ sở (mm)2600\n-Khoảng cách hai bánh xe trước/sau (mm)170\n-Bán kính quay vòng nhỏ nhất (Bánh xe/ Thân xe) (m)",
+            "descriptionCar": "DÁM KHÁC BIỆT\nĐôi khi những khoảnh khắc đẹp nhất là những giây phút bất ngờ đầy cảm hứng khác biệt mà chúng ta không chuẩn bị trước. Đó chính là tinh thần của Kona, là sự kết hợp của phong cách năng động cùng hiệu suất vận hành với những công nghệ hiện đại hàng đầu.\n\n\nPHONG CÁCH CỦA BẠN\nVới những đường nét thiết kế sắc nét cá tính, Hyundai Kona trở nên bắt mắt dưới mọi góc nhìn. Sở hữu những màu sắc bắt mắt và độc đáo, Kona giúp bạn nổi bật hơn, khác biệt hơn với số đông.\n\nBẠN TỎA SÁNG\nHyundai Kona là sự sáng tạo định hình nên một ngôn ngữ thiết kế SUV hoàn toàn mới. Cặp đèn LED chạy ban ngày ở phía trước tạo nên một dải ánh sáng ấn tượng, giúp bạn tỏa sáng trên mỗi chặng đường đi qua.\n\n\n\nKẾT NỐI KHÔNG GIỚI HẠN\nHyundai Kona sở hữu khả năng kết nối mạnh mẽ thông qua màn hình cảm ứng 8 inch tích hợp hệ thống dẫn đường vệ tinh. Bạn có thể kết nối với Kona thông qua Apple Carplay hoặc các phương thức truyền thống như Bluetooth/AUX/USB.",
+            "seatsCar": 10,
+            "TypeCar": "Kona",
+            "madeInCar": "USA",
+            "sizeCar": "4.165 x 1.800 x 1.565",
+            "lengthBaseCar": "2.600",
+            "engineCar": "Nu 2.0 MPI Atkinson",
+            "workCapacityCar": "1000l",
+            "fuelTypeCar": "1000000000000000000",
+            "fuelCapacityCar": "20000000000000",
+            "maxPowerCar": "1000 mã lưc",
+            "maxTorqueCar": "2000",
+            "gearCar": "",
+            "driveSystemCar": "",
+            "suspensionCar": "",
+            "brakeCar": "Phanh trợ lực",
+            "powerSteerCar": "",
+            "plateSizeCar": "",
+            "lightCar": "170",
+            "consumptionInCar": "",
+            "consumptionOutCar": "",
+            "consumptionCar": "160/180",
+            "costCar": 658000000,
+            "createdAt": "2021-10-21T17:53:18.197Z",
+            "updatedAt": "2021-10-24T06:13:50.666Z",
+            "slug": "hyundai-kona-2021",
+            "__v": 0,
+            "imgCarId": "CarProject/imgCar/b7x3nmotf6pa4vy4bkzu"
+          },
+          "quantity": 1
+        }
+      ]
+}
+###
+#Xem tất cả đơn đặt hàng
+GET http://localhost:5000/api/orders
+###
+#Xem chi tiết đơn đặt hàng
+GET http://localhost:5000/api/orders/61af6bdb17a0acf654a81e26
+###
+#Xóa một đơn hàng
+DELETE http://localhost:5000/api/orders/61af1c3ed86c77414c3434a2
+
+# ----------------------------------------SẢN PHẨM-----------------------------------------------------
+###
+# Xem toàn bộ sản phẩm
 GET http://localhost:5000/api/products
 
 ###
@@ -56,7 +161,7 @@ Content-Type: application/json
     "updatedAt": "2021-10-21T17:53:18.197Z",
     "slug": "hyundai-kona-2021",
     "__v": 0
-  }
+}
 
 ###
 # Tạo đăng kí báo giá

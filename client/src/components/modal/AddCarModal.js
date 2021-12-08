@@ -6,6 +6,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
+import validator from 'validator';
 export default function AddCarModal() {
     const {showAddCar,setShowAddCar,createProduct} = useContext(ProductContext);
     const [previewSource,setPreviewSource]= useState();
@@ -133,6 +134,18 @@ export default function AddCarModal() {
         e.preventDefault();
         if(!previewSource) {
             alert('Vui lòng chọn ảnh cho sản phẩm')
+            return
+        }
+        if(validator.isEmpty(nameCar)){
+            alert('Bạn chưa nhập tên sản phẩm')
+            return
+        }
+        if(validator.isEmpty(costCar)){
+            alert('Bạn chưa nhập giá sản phẩm')
+            return
+        }
+        if(!validator.isDecimal(costCar)){
+            alert('số giá sản phẩm phải là kiểu số')
             return
         }
         await createProduct(newCar);

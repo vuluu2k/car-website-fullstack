@@ -54,14 +54,16 @@ const CartContextProvider=({children})=>{
             localStorage.removeItem(LOCAL_STORAGE_PRODUCTS_CART_NAME);
         }
     }
+    const clearCart=()=>{
+        localStorage.removeItem(LOCAL_STORAGE_PRODUCTS_CART_NAME);
+    }
 
 
 
 
 
 
-
-    const cartContextData={showCart,setShowCart,addToCart,getCart,updateQuantityCart,deleteCart};
+    const cartContextData={showCart,setShowCart,addToCart,getCart,updateQuantityCart,deleteCart,clearCart};
     return (
         <CartContext.Provider value={cartContextData}>
             {children}

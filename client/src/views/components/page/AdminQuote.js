@@ -2,8 +2,9 @@ import React from 'react'
 import {Table,Button} from 'react-bootstrap';
 import {QuoteContext} from '../../../contexts/QuoteContext';
 import {ConfirmContext} from '../../../contexts/ConfirmContext';
-import {useContext,useEffect} from 'react';
+import {useContext,useEffect,useState} from 'react';
 import ConfirmModal from '../../../components/modal/ConfirmModal';
+import PaginationQuote from '../../../components/pagination/PaginationQuote'
 import moment from 'moment';
 
 export default function AdminQuote() {
@@ -19,7 +20,17 @@ export default function AdminQuote() {
         handleClose()
     }
     const handleClose=()=>setShowConfirmDeleteQuote({show:false,quoteId:''});
-
+    // CurrentPage and LengthPage
+    const [currentPage, setCurrentPage] = useState(1);
+    const [quotesPage] = useState(13);
+    // Get Current Products
+    const indexOfLastQuote = currentPage * quotesPage;
+    const indexOfFirstQuote = indexOfLastQuote - quotesPage;
+    const currentQuotes = quotes.slice(indexOfFirstQuote, indexOfLastQuote);
+    // ChangePage
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
     return (
         <div className="container">
             <Table  bordered hover size="sm">
@@ -34,7 +45,7 @@ export default function AdminQuote() {
                     </tr>
                 </thead>
                 <tbody>
-                    {quotes.map((quote,index)=>(
+                    {currentQuotes.map((quote,index)=>(
                         <tr key={quote._id}>
                             <td>{index + 1}</td>
                             <td>{quote.nameQuote}</td>
@@ -55,6 +66,14 @@ export default function AdminQuote() {
                     ))}
                 </tbody>
             </Table>
+            <div className="d-flex justify-content-center" >
+                <PaginationQuote
+                    quotesPage={quotesPage}
+                    totalQuotes={quotes.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+                />
+           </div>
             <ConfirmModal title="Xác nhận" content="Bạn chắc chắn muốn xoá" show={show} onClick={handleDelete} onClose={handleClose} />
         </div>
     )

@@ -5,9 +5,13 @@ import './Style.css';
 import {CartContext} from '../../contexts/CartContext';
 
 export default function BuyCard({product}) {
-    const {addToCart} = useContext(CartContext);
+    const {addToCart,setShowCart} = useContext(CartContext);
     const formatToCurrency=amount=>{
         return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    const handeBuy=()=>{
+        addToCart(product._id)
+        setShowCart(true)
     }
     return (
         <Card border="light" style={{ width: '100%'}}>
@@ -20,7 +24,7 @@ export default function BuyCard({product}) {
                 </Link>
                 <div className="d-flex justify-content-between align-items-center">
                     <div style={{color:'red',fontSize:'16px'}}><strong>Giá:</strong> <span style={{color:'#CE0303',fontWeight:'bold',fontSize:'14px'}}>{formatToCurrency(product.costCar)}<sup>₫</sup></span></div>
-                    <Button onClick={()=>addToCart(product._id)} variant="danger" size="sm" ><strong>ĐẶT HÀNG</strong></Button>  
+                    <Button onClick={handeBuy} variant="danger" size="sm" ><strong>ĐẶT HÀNG</strong></Button>  
                 </div>
             </Card.Body>
         </Card>

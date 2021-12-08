@@ -3,7 +3,7 @@ import {Button,Form,Modal} from 'react-bootstrap'
 import {useContext,useState} from 'react';
 import {QuoteContext} from '../../contexts/QuoteContext';
 import {ProductContext} from '../../contexts/ProductContext';
-
+import validator from 'validator';
 export default function QuoteModal() {
     const {showQuote, setShowQuote,createQuote,setShowToastQuote} = useContext(QuoteContext);
     const {productState:{products}}=useContext(ProductContext);
@@ -19,12 +19,39 @@ export default function QuoteModal() {
     })
     const onSubmit = async event=>{
       event.preventDefault();
+      if(validator.isEmpty(nameQuote)){
+        alert('Bạn chưa nhập tên')
+        return
+      }
+      if(validator.isEmpty(phoneQuote)){
+        alert('Bạn chưa nhập số điện thoại')
+        return
+      }
+      if(!validator.isNumeric(phoneQuote)){
+        alert('Số điện thoại phải là kiếu số')
+        return
+      }
+      if(!validator.isLength(phoneQuote,{min:10,max:12})){
+        alert('Số điện thoại không được quá 12 số')
+        return
+      }
+      if(validator.isEmpty(product)){
+        alert('Bạn chưa chọn sản phẩm')
+        return
+      }
       const {success,message}=await createQuote(newQuote);
       setShowToastQuote({show:success,message});
       handleClose();
     }
 
-    const handleClose = () => setShowQuote(false);
+    const handleClose = () => {
+      setNewQuote({
+        nameQuote:'',
+        phoneQuote:'',
+        product:'',
+      })
+      setShowQuote(false);
+    }
     return (
       <>
         <Modal show={showQuote} onHide={handleClose} >

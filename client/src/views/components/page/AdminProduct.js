@@ -1,12 +1,12 @@
 import React from 'react'
-import {Row,Col,Button,Card} from 'react-bootstrap';
+import {Row,Col,Button,Card,Spinner} from 'react-bootstrap';
 import {useContext,useEffect,useState} from 'react';
 import {ProductContext} from '../../../contexts/ProductContext';
 import AddCarModal from '../../../components/modal/AddCarModal'
 import UpdateCarModal from '../../../components/modal/UpdateCarModal'
 import ViewCarModal from '../../../components/modal/ViewCarModal';
 import ConfirmModal from '../../../components/modal/ConfirmModal'
-import PaginationCus from '../../../components/pagination/PaginationCus';
+import PaginationProduct from '../../../components/pagination/PaginationProduct';
 export default function AdminProduct() {
     const {
         productState:{products,productLoading,productsLoading},
@@ -33,18 +33,21 @@ export default function AdminProduct() {
         getProductDetail(productId)
         setShowViewCar(true)
     }
+    // CurrentPage and LengthPage
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(15);
+    const [productsPerPage] = useState(12);
     // Get Current Products
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct,  indexOfLastProduct);
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
     // ChangePage
     const paginate = pageNumber => {
         setCurrentPage(pageNumber);
     }
     if(productsLoading){
-        return <div>Loading...</div>
+        return <div className="d-flex justify-content-center" style={{marginTop:'30%'}}>
+            <Spinner animation="border" variant="primary" />
+        </div>
     }
     return (
         <div className="container" size="sm">
@@ -72,7 +75,7 @@ export default function AdminProduct() {
                 ))}
            </Row>
            <div className="d-flex justify-content-center pt-5" >
-            <PaginationCus
+            <PaginationProduct
                 
                     productsPerPage={productsPerPage}
                     totalProducts={products.length}

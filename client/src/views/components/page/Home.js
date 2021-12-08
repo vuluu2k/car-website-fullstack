@@ -9,7 +9,7 @@ import {NewContext} from '../../../contexts/NewContext'
 import {useContext, useState} from 'react';
 import PaginationCus from '../../../components/pagination/PaginationCus';
 
-export default function Home({products}) {
+export default function Home({products,image}) {
     const { newState:{news}} = useContext(NewContext)
 
 
@@ -26,7 +26,7 @@ export default function Home({products}) {
 
     return (
         <>
-            <ControlledCarousel />
+            <ControlledCarousel image={image} />
             <Container style={{padding:'36px 0'}}>
                 <div  className="TitleCar d-flex">
                     <div style={{textAlign:'center',textTransform:'uppercase',fontSize:'19px',margin:'auto',fontWeight:'bold'}}>

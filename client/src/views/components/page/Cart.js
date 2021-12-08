@@ -11,7 +11,7 @@ export default function Cart() {
     const carts=getCart();
     const sumMoney=()=>{
         let sum =0 ;
-        carts.forEach(cart=>{
+        carts!=null&&carts.forEach(cart=>{
             sum+=cart.product.costCar*cart.quantity;
         })
         return sum;

@@ -5,7 +5,6 @@ import parse from 'html-react-parser';
 
 export default function ViewCarModal() {
     const {productState:{product},showViewCar,setShowViewCar,setShowUpdateCar,setShowDelCar}=useContext(ProductContext);
-    console.log(product);
     const handleClose = () =>setShowViewCar(false);
     const formatToCurrency=amount=>{
         return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
