@@ -6,7 +6,7 @@ import {CommentContext} from '../../../contexts/CommentContext'
 import { ProductContext } from '../../../contexts/ProductContext'
 import ConfirmModal from '../../../components/modal/ConfirmModal'
 import moment from 'moment';
-
+import PaginationCus from '../../../components/pagination/PaginationCus';
 export default function AdminComment() {
     const {getComment,commentState:{comments},
             
@@ -35,6 +35,16 @@ export default function AdminComment() {
         handleClose();
     }
     const handleClose =() =>setShowConfirmDeleteComment({show:false,commentId:''});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [commentsPerPage] = useState(10);
+    // Get Current Comments
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const currentComments = comments.slice(indexOfFirstComment,indexOfLastComment);
+    // ChangePage
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
     return (
         <Container>
             <Row>
@@ -68,7 +78,7 @@ export default function AdminComment() {
                     </tr>
                 </thead>
                 <tbody>
-                    {comments.map((comment,index)=>(
+                    {currentComments.map((comment,index)=>(
                         <tr>
                     <td>{index+1}</td>
                     <td>{comment.nameComment}</td>
@@ -91,6 +101,14 @@ export default function AdminComment() {
                     
                 </tbody>
                 </Table>
+                <div className="d-flex justify-content-center pt-5" >
+                 <PaginationCus
+                    productsPerPage={commentsPerPage}
+                    totalProducts={comments.length}
+                    paginate={paginate}
+                    currentPage={currentPage}
+          />
+      </div>
                 </Col>
             </Row>
             <ConfirmModal title="Xác nhận" content="Bạn chắc chắn muốn xoá" show={show} onClick={()=>handleDelComment()} onClose={handleClose} />
