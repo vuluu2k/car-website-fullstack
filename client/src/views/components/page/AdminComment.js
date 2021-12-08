@@ -6,6 +6,7 @@ import {CommentContext} from '../../../contexts/CommentContext'
 import { ProductContext } from '../../../contexts/ProductContext'
 import ConfirmModal from '../../../components/modal/ConfirmModal'
 import moment from 'moment';
+
 export default function AdminComment() {
     const {getComment,commentState:{comments},
             
@@ -16,8 +17,10 @@ export default function AdminComment() {
     
 
     const [stateProductId,setStateProductId]=useState({
-        productId:productsLoading===false&&(products[0]._id)
+        productId:productsLoading===false&&(products[0]._id),
+        
     }) 
+    
     const {productId}=stateProductId
     useEffect(()=>{
         getComment(productId)
@@ -38,9 +41,7 @@ export default function AdminComment() {
                 <Col xs="3">    
                 <Card style={{ width: '100%' }} border="light">
                 {products.map(product=>(
-                        <Row className="d-flex align-items-center" style={{borderBottom:'1px solid #0091ff' }} onClick={()=>setStateProductId({
-                            productId:product._id
-                        }) }>
+                        <Row className='d-flex align-items-center' style={{borderBottom:'1px solid #0091ff'}} onClick={()=>setStateProductId({productId:product._id}) }>
                         <Col xs="5"> 
                              <Card.Img variant="top" src={product.imgCarUrl} />
                         </Col>

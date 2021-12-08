@@ -1,15 +1,16 @@
 import React from 'react'
-import {useContext,useState} from 'react';
+import {useContext,useState,useEffect} from 'react';
 //Bootstrap and jQuery libraries
 import 'bootstrap/dist/css/bootstrap.min.css';
 //Star Rating and other modules
 import {CommentContext} from '../../contexts/CommentContext';
 import {ProductContext} from '../../contexts/ProductContext';
 import ReactStars from "react-rating-stars-component";
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button,Card} from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import moment from 'moment';
 export default function Comment() {
-    const {showComment, setShowComment,createComment,setShowToastComment} = useContext(CommentContext);
+    const {getComment,commentState:{comments},showComment, setShowComment,createComment,setShowToastComment} = useContext(CommentContext);
     const {productState:{products}}=useContext(ProductContext);
     const {slug}=useParams();
     const productSlug=products.find(product=>product.slug===slug);
@@ -20,10 +21,10 @@ export default function Comment() {
       contentComment:'',
       rate:'',
     })
-    const[toast,setToast] = useState({
-      t:''
-    })
-    const{t}=toast;
+    useEffect(()=>{
+      getComment(productSlug._id)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[productSlug])
     const {nameComment, emailComment,product,contentComment,rate} =newComment;
     const onChangeCreateCommentForm= event => setNewComment({
       ...newComment,
@@ -31,7 +32,6 @@ export default function Comment() {
       [event.target.name]:event.target.value
     })
     const onChangeCreateRateForm= event =>{
-      console.log(event)
       setNewComment({
        ...newComment,
         rate:event+''
@@ -45,10 +45,9 @@ export default function Comment() {
           handleClose();
           
         }
-        else{
-          handle1();
-        }
+        
       }
+      
     const onSubmitBack = async event=>{
         event.preventDefault();
         setNewComment({
@@ -58,24 +57,18 @@ export default function Comment() {
           rate:''
         })
         handleClose2();
-        handle2();
       }
     const handleClose = () => setShowComment(false);
     const handleClose2 = () => setShowComment(true);
-    const handle1 = () => setToast({
-      t:'Vui lòng nhập đầy đủ thông tin!'
-    });
-    const handle2 = () => setToast({
-      t:''
-    });
+   
     //const { TextArea } = Input;
+    
     return (
-
+        
         <div>
           {
               showComment&&
                <div>
-                <p style={{color:'#ff0000'}}>{t}</p>
                 <Form.Group style={{margin:'20px'}}>
                     <Form.Text style={{fontSize:'15px'}}>Họ tên: </Form.Text>
                     <Form.Control style={{margin:'5px'}} type='text' placeholder='Họ và tên' value={nameComment} name='nameComment' onChange={onChangeCreateCommentForm} required/>
@@ -85,7 +78,7 @@ export default function Comment() {
                     <Form.Control type='email' style={{margin:'5px'}} placeholder='Email' value={emailComment} name='emailComment' onChange={onChangeCreateCommentForm} required/>
                     <Form.Text className="text-muted">
                         Vui lòng nhập email!
-                  </Form.Text>
+                    </Form.Text>
                 </Form.Group>
                 <Form.Group style={{margin:'20px'}}>
                     <Form.Text style={{fontSize:'15px'}}>Nội dung: </Form.Text>
@@ -100,6 +93,9 @@ export default function Comment() {
                 <Button variant="primary" type="submit" onClick={onSubmit} style={{margin:'20px'}}>
                     Gửi
                  </Button>
+                 <Button variant="primary" type="submit" onClick={handleClose} style={{margin:'20px'}}>
+                    Xem các đánh giá
+                 </Button>
                  
                </div>     
           }
@@ -107,9 +103,23 @@ export default function Comment() {
           {
             !showComment&&
             <div>
-              <p>Bạn đã tạo đánh giá thành công!</p>
-              <Button htmlType="submit" onClick={onSubmitBack} style={{margin:'20px'}}>
-                    Quay lại
+              <div>  
+              {comments.map((comment)=>(
+               <Card style={{margin:'10px'}}>
+                  <Card.Title style={{margin:'10px',border:'1px'}}>{comment.nameComment}  ({comment.emailComment})
+                  </Card.Title>
+                  <Card.Text as="h6" style={{marginLeft:'10px',border:'1px'}}>
+                    {comment.contentComment}
+                  </Card.Text>
+                  <div style={{marginLeft:'10px'}}>
+                    <ReactStars  edit={false}  value={comment.rate} size={20}></ReactStars>
+                  </div>
+                  <Card.Footer  className="text-muted">Ngày tạo: {moment(comment.createdAt).format('DD/MM/YYYY HH:mm')}</Card.Footer>
+                </Card>
+                ))}
+                </div>
+                <Button htmlType="submit" onClick={onSubmitBack} style={{margin:'20px'}}>
+                    Tạo đánh giá
                  </Button>
             </div>
           }

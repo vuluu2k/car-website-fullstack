@@ -53,7 +53,7 @@ export default function ProductDetail({products,productsLoading}) {
                                 <Nav.Link eventKey="first">Mô tả</Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={{padding:'0 4px'}}>
-                                <Nav.Link eventKey="second">Đánh giá(0)</Nav.Link>
+                                <Nav.Link eventKey="second">Đánh giá</Nav.Link>
                             </Nav.Item>
                         </Nav>
                         <Tab.Content>
