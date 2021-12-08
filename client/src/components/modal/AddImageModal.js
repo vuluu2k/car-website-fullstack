@@ -4,6 +4,7 @@ import React,{
 } from 'react'
 import {SilderContext} from'../../contexts/SilderContext'
 import {Modal,Form,Button} from 'react-bootstrap'
+import validator from 'validator';
 export default function AddImageModal() {
     const {showAddImage,setShowAddImage,createImage}= useContext(SilderContext)
     // const {showAddCar,setShowAddCar,createProduct} = useContext(ProductContext);
@@ -36,6 +37,10 @@ export default function AddImageModal() {
         e.preventDefault();
         if(!previewSource) {
             alert('Vui lòng chọn ảnh cho sản phẩm')
+            return
+        }
+        if(validator.isEmpty(kind)){
+            alert('Vui lòng chọn vị trí')
             return
         }
         await createImage(newImage);

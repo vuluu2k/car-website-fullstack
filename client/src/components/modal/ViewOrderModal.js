@@ -5,10 +5,10 @@ import {Modal,Form,Row,Col,Button} from 'react-bootstrap'
 import {PayContext} from '../../contexts/PayContext'
 import formatToCurrency from '../../middleware/NumberToVND'
 export default function ViewOrderModal() {
-    const {orderState:{order},showView,setShowView,setShowDelete,setShowUpdate} = useContext(PayContext);
-    const handleClose = () =>{
-        setShowView(false);
-    }
+    const {
+        orderState:{order},showView,
+        setShowView,setShowDelete,setShowUpdate,updateOrder
+    } = useContext(PayContext);
     const handleDelete =()=>{
         setShowDelete({show:true,idOrder:order._id})
         handleClose()
@@ -16,6 +16,13 @@ export default function ViewOrderModal() {
     const handleUpdate =()=>{
         setShowUpdate({show:true,idOrder:order._id})
         handleClose()
+    }
+    const checkOrder=async (updateForm)=>{
+        await updateOrder(updateForm)
+        handleClose()
+    }
+    const handleClose = () =>{
+        setShowView(false);
     }
     const sumMoney=()=>{
         let sum=0
@@ -40,7 +47,10 @@ export default function ViewOrderModal() {
                                 Thông tin khách hàng
                             </div>
                             <div >
-                                <Button style={{marginRight: '5px'}} variant="outline-primary" >Xác thực</Button>
+                                <a href={`tel:${order.numberPhone}`} style={{marginRight: '5px'}}>
+                                    <Button variant="outline-primary" >Gọi ngay</Button>
+                                </a>
+                                {order.check===false&&<Button onClick={()=>checkOrder({...order,check:true})} style={{marginRight: '5px'}} variant="outline-warning" >Xác thực</Button>}
                                 <Button onClick={handleUpdate} style={{marginRight: '5px'}} variant="outline-success" >Chỉnh sửa ngay</Button>
                                 <Button onClick={handleDelete} style={{marginRight: '5px'}} variant="outline-danger">Xoá</Button>
                                 <Button onClick={handleClose} variant="outline-dark" >Quay lại</Button>

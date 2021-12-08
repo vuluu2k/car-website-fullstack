@@ -4,7 +4,7 @@ import React,{
 } from 'react'
 import {Modal,Form,Row,Col,Button} from 'react-bootstrap'
 import {PayContext} from '../../contexts/PayContext'
-
+import validator from 'validator';
 export default function UpdateOrderModal() {
     const {orderState:{order},showUpdate,setShowUpdate,updateOrder} = useContext(PayContext);
     const [upOrder,setUpOrder]=useState(order)
@@ -25,6 +25,42 @@ export default function UpdateOrderModal() {
     }
     const onSubmitOrderForm=async event=>{
         event.preventDefault();
+        if(validator.isEmpty(firstName)){
+            alert('Tên bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(lastName)){
+            alert('Họ bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(nation)){
+            alert('Quốc gia bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(address)){
+            alert('Địa chỉ bạn đang để trống')
+            return
+        }
+        if(!validator.isEmail(email)){
+            alert('Email không hợp lệ')
+            return
+        }
+        if(validator.isEmpty(city)){
+            alert('Thành phố bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(numberPhone)){
+            alert('Số điện thoại bạn đang để trống')
+            return
+        }
+        if(!validator.isNumeric(numberPhone)){
+            alert('Số điện thoại bạn đang nhập không phải là số')
+            return
+        }
+        if(!validator.isLength(numberPhone,{min:10,max:12})){
+            alert('Số điện thoại không được quá 12 số')
+            return
+        }
         await updateOrder(upOrder)
         handleClose()
     }

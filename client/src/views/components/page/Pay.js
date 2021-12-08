@@ -10,8 +10,10 @@ import {CartContext} from '../../../contexts/CartContext';
 import {PayContext} from '../../../contexts/PayContext';
 import formatToCurrency from '../../../middleware/NumberToVND'
 import {useHistory} from 'react-router-dom'
+import validator from 'validator';
 import './css/Pay.css'
 export default function Pay() {
+    
     const history = useHistory()
     const{getCart,clearCart} = useContext(CartContext);
     const{createOrder} = useContext(PayContext);
@@ -35,7 +37,7 @@ export default function Pay() {
         firstName,lastName,
         company,nation,address,
         codeZip,city,numberPhone,
-        email,note
+        email,note,pay
     }=newOrder
     const onChangeCreateOrderForm=event=>setNewOrder({
         ...newOrder,
@@ -43,6 +45,47 @@ export default function Pay() {
     })
     const onSubmitOrderForm=async event=>{
         event.preventDefault();
+        if(validator.isEmpty(firstName)){
+            alert('Tên bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(lastName)){
+            alert('Họ bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(nation)){
+            alert('Quốc gia bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(address)){
+            alert('Địa chỉ bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(pay)){
+            alert('Bạn chưa chọn hình thức thanh toán')
+            return
+        }
+        if(!validator.isEmail(email)){
+            alert('Email không hợp lệ')
+            return
+        }
+        if(validator.isEmpty(city)){
+            alert('Thành phố bạn đang để trống')
+            return
+        }
+        if(validator.isEmpty(numberPhone)){
+            alert('Số điện thoại bạn đang để trống')
+            return
+        }
+        if(!validator.isNumeric(numberPhone)){
+            alert('Số điện thoại bạn đang nhập không phải là số')
+            return
+        }
+        if(!validator.isLength(numberPhone,{min:10,max:12})){
+            alert('Số điện thoại không được quá 12 số')
+            return
+        }
+        
         await createOrder(newOrder)
         clearCart()
         setNewOrder({
@@ -67,6 +110,7 @@ export default function Pay() {
         })
         return sum;
     }
+    
     return (
         <Container style={{padding:'36px 0'}}>
             <Form>

@@ -30,6 +30,7 @@ export default function AdminPay() {
     const choseOrderView =(id)=>{
         getOrderDetail(id)
         setShowView(true)
+        setShowUpdate(false)
     }
     const checkOrder=async (updateForm)=>{
         await updateOrder(updateForm)
