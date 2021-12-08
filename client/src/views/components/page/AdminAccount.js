@@ -44,6 +44,8 @@ export default function AdminAccount() {
 
     }
 
+ 
+
     return (
         <div className="container">
             
@@ -61,50 +63,60 @@ export default function AdminAccount() {
                 <Button variant="primary" type="submit" onClick={onSubmit} style={{margin:'20px'}}>
                     Thêm
                 </Button>
-                <Button variant="primary" type="submit"  style={{margin:'20px'}}>
+
+                {/* <Button variant="primary" type="submit"  style={{margin:'20px'}}>
                     Sửa
                 </Button>
                 <Button variant="primary" type="submit"  style={{margin:'20px'}} >
                     Xóa
-                </Button>
+                </Button> */}
 
            
 
-           <Table  bordered hover size="sm">
+           <Table  bordered hover size="sm" >
            <thead >
                     <tr>
                         <th >STT</th>
                         <th >Id</th>
                         <th >Tài khoản</th>
                         <th >Mật khẩu</th>
-                      
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {accounts.map((item, index) =>(
-                            <tr key={item._id} > 
-                                <td>
-                                    { (index + 1 ) }
-                                </td>
-                                <td >
-                                    { item._id }
-                                </td>
-                                <td >
-                                    { item.nameAccount } 
-                                </td>
-                                <td >
-                                    { item.passwordAccount }
-                                </td>
-                            
-                            </tr> 
+                        <tr key={item._id} > 
+                            <td>
+                                { (index + 1 ) }
+                            </td>
+                            <td >
+                                { item._id }
+                            </td>
+                            <td >
+                                { item.nameAccount } 
+                            </td>
+                            <td>
+                                { item.passwordAccount }
+                            </td>
+                            <td>
+                                <center>
+                                <div className="d-flex justify-content-around align-items-center">
+                                    
+                                    <Button variant="outline-primary" size="sm" ><i className="fas fa-pen"></i></Button>
+                                    
+                                    <Button variant="outline-primary" size="sm" ><i className="fas fa-trash"></i></Button>
+                                </div>
+                                </center>
+                            </td>
+                        </tr> 
                     
                     ))}
 
                 </tbody>
 
            </Table>
-        
+           
         </div>
         
     
