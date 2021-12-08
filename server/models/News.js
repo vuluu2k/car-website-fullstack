@@ -13,8 +13,7 @@ const NewsSchema = new Schema({
         type: String
     },
     imageNewId: {
-        type: String,
-        required: true
+        type: String
     }
 }, {
     timestamps: true,

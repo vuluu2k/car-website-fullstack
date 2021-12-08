@@ -52,6 +52,7 @@ const NewContextProvider = ({children}) =>{
      // [CREATE] 
      const createNew=async (newForm)=>{
         try {
+            
             const response= await axios.post(`${apiUrl}/news`,newForm);
             if(response.data.success){
                 dispatch({type:NEW_CREATE_SUCCESS,payload:response.data.news})
@@ -63,7 +64,7 @@ const NewContextProvider = ({children}) =>{
     }
 
     // [UPDATE] 
-    const updateNewTT=async (newForm)=>{
+    const updateNew=async (newForm)=>{
         try {
             const response = await axios.put(`${apiUrl}/news/${newForm._id}`,newForm)
             if(response.data.success){
@@ -94,7 +95,7 @@ const NewContextProvider = ({children}) =>{
         getNew,createNew,
         showAddNew,setShowAddNew,
         getNewDetail,deleteNew,
-        showDelNew,setShowDelNew,updateNewTT,
+        showDelNew,setShowDelNew,updateNew,
         showUpdateNew,setShowUpdateNew,
         showViewNew,setShowViewNew
     }

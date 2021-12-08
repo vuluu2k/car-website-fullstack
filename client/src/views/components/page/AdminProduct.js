@@ -38,7 +38,7 @@ export default function AdminProduct() {
     // Get Current Products
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = products.slice(indexOfFirstProduct,  indexOfLastProduct);
     // ChangePage
     const paginate = pageNumber => {
         setCurrentPage(pageNumber);

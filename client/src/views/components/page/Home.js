@@ -6,15 +6,23 @@ import LineCarView from '../content/home/LineCarView';
 import ContentCard from '../../../components/card/ContentCard';
 import CardHot from '../../../components/News/cardhot';
 import {NewContext} from '../../../contexts/NewContext'
-import {useContext,useEffect} from 'react';
+import {useContext, useState} from 'react';
+import PaginationCus from '../../../components/pagination/PaginationCus';
 
 export default function Home({products}) {
-    const {getNew, newState:{news}} = useContext(NewContext)
+    const { newState:{news}} = useContext(NewContext)
 
-    useEffect(()=>{
-        getNew()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[news]);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(3);
+    // Get Current Products
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = news.slice(indexOfFirstProduct,indexOfLastProduct);
+    // ChangePage
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
 
     return (
         <>
@@ -77,13 +85,20 @@ export default function Home({products}) {
                     </div>
                     <Row className="row-cols-1 row-cols-sm-3 mx-auto">
 
-                    {news.map(item => (
+                    {currentProducts.map(item => (
                             <Col key={item._id}>
                                 <CardHot product={item}/>
                             </Col>
-                        
                         ))}
-                </Row>
+                    </Row>
+                    <div className="d-flex justify-content-center pt-5" >
+                        <PaginationCus
+                            productsPerPage={productsPerPage}
+                            totalProducts={news.length}
+                            paginate={paginate}
+                            currentPage={currentPage}
+                        />
+                    </div>
                 </Container>
             </div>
         </>

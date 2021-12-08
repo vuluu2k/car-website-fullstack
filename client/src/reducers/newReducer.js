@@ -29,7 +29,7 @@ export const newReducer=(state,action)=>{
         case NEW_CREATE_SUCCESS:
             return {
                 ...state,
-                news:[...state.news,payload]
+                newTT:[...state.news,payload]
             }
         case NEW_UPDATE_SUCCESS:
             const newNews=state.news.map(newTT =>{

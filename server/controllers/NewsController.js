@@ -5,7 +5,7 @@ class NewsController {
 
     async getNew(req, res) {
         try {
-            const news = await New.find({});
+            const news = await New.find({}).sort({createdAt: -1});
             res.json({ success: true, news })
         } catch (e) {
             console.log(e);

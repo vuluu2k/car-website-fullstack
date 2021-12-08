@@ -46,7 +46,8 @@ export default function ViewNewModal() {
                             <Card.Title xs="12" md="6" style={{ textTransform:'uppercase'}}>{newTT.titleNew}</Card.Title>
                         </Row>
                         <Card.Body classNames="mt-4">
-                            <Card.Text >
+                            <Card.Title style={{ textTransform:'uppercase'}}>Nội dung</Card.Title>
+                            <Card.Text classNames="mt-2">
                                 {parse(newTT.contentNew)}
                             </Card.Text>
                         </Card.Body>

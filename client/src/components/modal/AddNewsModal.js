@@ -11,67 +11,66 @@ export default function AddNewsModal() {
   const [previewSource, setPreviewSource] = useState();
   const [stateNew, setStateNew] = useState({
     contentNew: EditorState.createEmpty(),
-  });
+  })
 
-  const [newNew, setNew] = useState({
-    titleNew: "",
-    contentNew: "",
-    imageNewUrl: "",
-    imageNewId: "",
-  });
-  const { titleNew } = newNew;
+  const [News, setNews] = useState({
+    titleNew: '',
+    contentNew: '',
+    imageNewUrl: '',
+    imageNewId: '',
+  })
+  const { titleNew } = News;
 
-  const onChangeNewForm = (event) =>
-    setNew({
-      ...newNew,
+  const onChangeNewForm = (event) => setNews({
+      ...News,
       [event.target.name]: event.target.value,
-    });
+    })
   const onEditorStateChangeCon = (contentNew) => {
     setStateNew({
       contentNew,
     });
-    setNew({
-      ...newNew,
-      contentNew: draftToHtml(convertToRaw(contentNew.getCurrentContent())),
+    setNews({
+      ...News,
+      contentNew: draftToHtml(convertToRaw(contentNew.getCurrentContent()))
     });
   };
   const { contentNew } = stateNew;
   const handleClose = () => {
     setShowAddNew(false);
-    setNew({
-      titleNew: "",
-      contentNew: "",
-      imageNewUrl: "",
-      imageNewId: "",
+    setNews({
+      titleNew: '',
+      contentNew: '',
+      imageNewUrl: '',
+      imageNewId: ''
     });
     setPreviewSource();
     setStateNew({
       contentNew: EditorState.createEmpty(),
-    });
+    })
   };
 
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     previewFile(file);
   };
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
-      setNew({
-        ...newNew,
-        imageNewUrl: reader.result,
+      setPreviewSource(reader.result)
+      setNews({
+        ...News,
+        imageNewUrl: reader.result
       });
     };
   };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     if (!previewSource) {
-      alert("Vui lòng chọn ảnh cho sản phẩm");
-      return;
+      alert("Vui lòng chọn ảnh cho sản phẩm")
+      return
     }
-    await createNew(newNew);
+    await createNew(News);
     handleClose();
   };
   return (

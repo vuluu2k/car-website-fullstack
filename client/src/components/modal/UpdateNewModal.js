@@ -12,11 +12,11 @@ export default function UpdateNewModal() {
     newState: { newTT },
     showUpdateNew,
     setShowUpdateNew,
-    updateNewTT,
+    updateNew
   } = useContext(NewContext);
 
-  const [updateNew, setUpdateNew] = useState(newTT);
-  useEffect(() => setUpdateNew(newTT), [newTT]);
+  const [updateNews, setUpdateNews] = useState(newTT);
+  useEffect(() => setUpdateNews(newTT), [newTT]);
 
   const [previewSource, setPreviewSource] = useState();
   const [stateNew, setStateNew] = useState({
@@ -25,26 +25,26 @@ export default function UpdateNewModal() {
   useEffect(()=>setStateNew({
     contentNew: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(newTT.contentNew).contentBlocks)),
   }),[newTT.contentNew])
-  const { titleNew, imageNewUrl } = updateNew;
+  const { titleNew, imageNewUrl } = updateNews;
 
   const onChangeUpdateNewForm = (event) =>
-    setUpdateNew({
-      ...updateNew,
+    setUpdateNews({
+      ...updateNews,
       [event.target.name]: event.target.value,
     });
   const onEditorStateChangeCon = (contentNew) => {
     setStateNew({
       contentNew,
     });
-    setUpdateNew({
-      ...updateNew,
+    setUpdateNews({
+      ...updateNews,
       contentNew: draftToHtml(convertToRaw(contentNew.getCurrentContent())),
     });
   };
   const { contentNew } = stateNew;
   const handleClose = () => {
     setShowUpdateNew(false);
-    setUpdateNew(newTT);
+    setUpdateNews(newTT);
     setPreviewSource();
     setStateNew({
       contentNew: EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(newTT.contentNew).contentBlocks)),
@@ -60,8 +60,8 @@ export default function UpdateNewModal() {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPreviewSource(reader.result);
-      setUpdateNew({
-        ...updateNew,
+      setUpdateNews({
+        ...updateNews,
         imageNewUrl: reader.result?reader.result:imageNewUrl
       });
     };
@@ -70,9 +70,9 @@ export default function UpdateNewModal() {
     e.preventDefault();
     if (!previewSource && !imageNewUrl) {
       alert("Vui lòng chọn ảnh cho sản phẩm");
-      return;
+      return
     }
-    await updateNewTT(updateNew);
+    await updateNew(updateNews);
     handleClose();
   };
   return (

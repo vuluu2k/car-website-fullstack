@@ -4,18 +4,24 @@ import CardLH from "../../../components/News/cardlh";
 import CardInfor from "../../../components/News/cardinfor";
 import CardLeft from "../../../components/News/cardleft";
 import { NewContext } from "../../../contexts/NewContext";
-import { useContext, useEffect } from "react";
+import { useContext, useState } from "react";
+import PaginationCus from '../../../components/pagination/PaginationCus';
 
 export default function News() {
   const {
-    getNew,
     newState: { news },
   } = useContext(NewContext);
 
-  useEffect(() => {
-    getNew();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [news]);
+  const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(3);
+    // Get Current Products
+    const indexOfLastProduct = currentPage * productsPerPage ;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = news.slice(indexOfFirstProduct,indexOfLastProduct);
+    // ChangePage
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
   return (
     <Container style={{ padding: "36px 0" }}>
       <Row>
@@ -27,7 +33,7 @@ export default function News() {
               width: "25%",
               color: "rgb(255, 11, 11)",
             }} />
-          {news.map((item) => (
+          {currentProducts.map((item) => (
             <div key={item._id}>
               <CardInfor product={item} />
               <hr
@@ -38,6 +44,14 @@ export default function News() {
                 }} />
             </div>
           ))}
+          <div className="d-flex justify-content-center pt-5" >
+            <PaginationCus
+                productsPerPage={productsPerPage}
+                totalProducts={news.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
+        </div>
         </Col>
         <Col md={4}>
           <CardLH
@@ -62,6 +76,7 @@ export default function News() {
           </Card.Body>
         </Col>
       </Row>
+      
     </Container>
   );
 }

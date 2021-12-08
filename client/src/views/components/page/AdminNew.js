@@ -5,7 +5,8 @@ import AddNewModal from "../../../components/modal/AddNewsModal";
 import UpdateNewModal from "../../../components/modal/UpdateNewModal";
 import ViewNewModal from "../../../components/modal/ViewNewModel";
 import ConfirmModal from "../../../components/modal/ConfirmModal";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import PaginationCus from '../../../components/pagination/PaginationCus';
 export default function AdminNew() {
   const {
     newState: { news, newLoading },
@@ -37,43 +38,57 @@ export default function AdminNew() {
     getNewDetail(newId)
     setShowViewNew(true)
   }
+  const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(6);
+    // Get Current Products
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = news.slice(indexOfFirstProduct,indexOfLastProduct);
+    // ChangePage
+    const paginate = pageNumber => {
+        setCurrentPage(pageNumber);
+    }
   return (
     <div className="container" size="sm">
       <Row className="row-cols-1 row-cols-md-2 mx-auto">
-        {news.map((news) => (
-          <Col key={news._id}>
+        {currentProducts.map((item) => (
+          <Col key={item._id}>
             <Card border="primary" style={{ marginTop: "5px" }}>
               <Row className="d-flex align-items-center">
                     <Col xs={7} style={{padding:'0 0 0 8%'}}>
-                      <Card.Img style={{ height: "200px" }} variant="top" src={news.imageNewUrl}/>
+                      <Card.Img style={{ height: "200px" }} variant="top" src={item.imageNewUrl}/>
                     </Col>
                     <Col xs={5} style={{padding:'0'}} >
                         <Card.Body>
                             <Card.Title  as="h6" style={{ height: "40px", textTransform: "uppercase" }}>
-                              {news.titleNew}
+                              {item.titleNew}
                             </Card.Title>
                             <div className="d-flex mt-4" style={{ justifyContent: "center" }}>
-                              <Button variant="outline-success" size="sm" onClick={()=>choseNewView(news._id)}>
+                              <Button variant="outline-success" size="sm" onClick={()=>choseNewView(item._id)}>
                                 <i className="far fa-eye"></i>
                               </Button>
-                              <Button style={{ marginLeft: "5%" }} variant="outline-info"  size="sm" onClick={()=>choseNewUpdate(news._id)}>
+                              <Button style={{ marginLeft: "5%" }} variant="outline-info"  size="sm" onClick={()=>choseNewUpdate(item._id)}>
                                 <i className="fas fa-pencil-alt"></i>
                               </Button>
-                              <Button   style={{ marginLeft: "5%" }}  variant="outline-danger"  size="sm" onClick={()=>setShowDelNew({show:true,newId:news._id})}>
+                              <Button   style={{ marginLeft: "5%" }}  variant="outline-danger"  size="sm" onClick={()=>setShowDelNew({show:true,newId:item._id})}>
                                 <i className="fas fa-trash-alt"></i>
                               </Button>
                             </div>
                         </Card.Body>
                     </Col>
-                  
-
-                  
-                  
               </Row>
             </Card>
           </Col>
         ))}
       </Row>
+      <div className="d-flex justify-content-center pt-5" >
+          <PaginationCus
+              productsPerPage={productsPerPage}
+              totalProducts={news.length}
+              paginate={paginate}
+              currentPage={currentPage}
+          />
+      </div>
       <div className="btn_addCar-admin">
         <Button variant="primary" onClick={() => setShowAddNew(true)}>
           <i className="fas fa-plus-circle"></i>
