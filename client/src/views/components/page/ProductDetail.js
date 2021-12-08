@@ -9,7 +9,7 @@ export default function ProductDetail({products,productsLoading}) {
     const {slug}=useParams();
     const [show,setShow]=useState(false);
     const handleClose=()=>setShow(false);
-    const {addToCart} = useContext(CartContext);
+    const {addToCart,setShowCart} = useContext(CartContext);
     if(productsLoading){
         return (
             <div className="d-flex justify-content-center mt-2">
@@ -20,6 +20,10 @@ export default function ProductDetail({products,productsLoading}) {
     const productSlug=products.find(product=>product.slug===slug);
     const formatToCurrency=amount=>{
         return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    const handeBuy=()=>{
+        addToCart(productSlug._id)
+        setShowCart(true)
     }
     return (
         <Container style={{padding:'36px 0'}}>
@@ -37,7 +41,7 @@ export default function ProductDetail({products,productsLoading}) {
                                 </Card.Text>
                                 <div className="d-flex justify-content-between">
                                     {formatToCurrency(productSlug.costCar)}₫
-                                    <Button variant="danger" onClick={()=>addToCart(productSlug._id)}>ĐẶT HÀNG</Button>
+                                    <Button variant="danger" onClick={handeBuy}>ĐẶT HÀNG</Button>
                                 </div>
                             </Card.Body>
                         </Col>
