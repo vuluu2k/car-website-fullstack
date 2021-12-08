@@ -66,6 +66,7 @@ const QuoteContextProvider=({children})=>{
             {children}
         </QuoteContext.Provider>
     )
+
 }
 
 export default QuoteContextProvider;
