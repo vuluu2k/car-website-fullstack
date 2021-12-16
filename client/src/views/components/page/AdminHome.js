@@ -2,7 +2,7 @@ import React from 'react'
 export default function AdminHome() {
     return (
         <div>
-            đây là trảnh chủ dashbord
+            <h1>Thông tin chung</h1>
         </div>
     )
 }
