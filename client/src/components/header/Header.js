@@ -23,11 +23,11 @@ export default function Header({products}) {
             <div>
                 <Container className="d-flex justify-content-between align-items-center centerBar w-100">
                     <div>
-                        <img src="http://hyundaimotorvn.com/wp-content/uploads/2021/09/Artboard-1-Copy.png" alt="Logo Huyndai|TcMotor"/>
+                        <img src="https://res.cloudinary.com/vuluu/image/upload/v1639755059/CarProject/header/Artboard-1-Copy_ecwc37.png" alt="Logo Huyndai|TcMotor"/>
                     </div>
                     <div className="gps-bar">
                         <div className="d-flex justify-content-center align-items-center">
-                            <img src="http://hyundaimotorvn.com/wp-content/uploads/2019/05/x-1.png" alt="gps" width='36' height='34'/>
+                            <img src="https://res.cloudinary.com/vuluu/image/upload/v1639755107/CarProject/header/x-1_gjubik.png" alt="gps" width='36' height='34'/>
                             <div className="gps-font">Đại học Công Nghiệp Hà Nội, Bắc Từ Liêm, Hà Nội</div>
                         </div>
                     </div>
