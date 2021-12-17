@@ -1,4 +1,4 @@
-const Silder= require('../models/silder')
+const Silder= require('../models/Silder')
 const {cloudinary} = require('../utils/cloudinary');
 
 class SilderController{
