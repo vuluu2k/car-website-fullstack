@@ -5,7 +5,7 @@ const db = require('./config/db');
 db.connect();
 const route = require('./routes');
 const port=process.env.PORT||5000;
-
+console.log(process.env.PORT)
 
 app.use(express.json({limit:'50mb'}));
 app.use(express.urlencoded({
