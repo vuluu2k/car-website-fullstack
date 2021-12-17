@@ -1,6 +1,6 @@
 export const apiUrl =
     process.env.NODE_ENV !== "production" ?
-    "https://safe-bastion-90555.herokuapp.com/" :
+    "https://cars-shop-vuluu.herokuapp.com/api" :
     "";
 export const LOCAL_STORAGE_ACCOUNT_NAME = 'account_store';
 export const LOCAL_STORAGE_PRODUCTS_CART_NAME = 'products_cart_store';
