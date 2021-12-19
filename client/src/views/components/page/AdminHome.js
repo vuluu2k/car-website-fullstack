@@ -41,7 +41,6 @@ export default function AdminHome() {
       return quoteLengthChart;
     }
   };
-  console.log(daysLength());
   if (productsLoading && quotesLoading && ordersLoading) {
     return (
       <div
@@ -96,7 +95,7 @@ export default function AdminHome() {
                   if (daysLength().includes(key)) {
                     return productChart[key].length;
                   } else {
-                    return null;
+                    return 0;
                   }
                 }),
               },
@@ -109,7 +108,7 @@ export default function AdminHome() {
                   if (daysLength().includes(key)) {
                     return quoteChart[key].length;
                   } else {
-                    return null;
+                    return 0;
                   }
                 }),
               },
@@ -122,7 +121,7 @@ export default function AdminHome() {
                   if(daysLength().includes(key)){
                     return orderChart[key].length;
                   }else{
-                    return null;
+                    return 0;
                   }
                 }),
               },
