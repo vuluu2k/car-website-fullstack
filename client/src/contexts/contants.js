@@ -1,7 +1,7 @@
 export const apiUrl =
     process.env.NODE_ENV !== "production" ?
-    "http://localhost:5000/api":
-    "https://cars-shop-vuluu.herokuapp.com/api";
+    // "http://localhost:5000/api":
+    "https://cars-shop-vuluu.herokuapp.com/api":"";
 export const LOCAL_STORAGE_ACCOUNT_NAME = 'account_store';
 export const LOCAL_STORAGE_PRODUCTS_CART_NAME = 'products_cart_store';
 

@@ -18,11 +18,21 @@ export default function MenuAdmin() {
                 <div>
                     <div className="d-flex flex-column  text-white" style={{padding:'0 10% 0 10%'}}>
                         <div >
+                            <Link to='/admin/dashboard' className='font-link-menu'>
+                                <div className="color-container d-flex align-items-center">
+                                    <div className="icon_center" style={{paddingLeft:'5%'}}>
+                                        <i className="icon_icon fas fa-tachometer-alt"></i>
+                                        <span className="icon_span">DashBoard</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                        <div >
                             <Link to='/admin/products' className='font-link-menu'>
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-car"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Sản phẩm</span>
+                                        <span className="icon_span">Sản phẩm</span>
                                     </div>
                                 </div>
                             </Link>
@@ -32,7 +42,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-phone-alt"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Nhận báo giá</span>
+                                        <span className="icon_span">Nhận báo giá</span>
                                     </div>
                                 </div>
                             </Link>
@@ -42,7 +52,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-comments"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Đánh giá</span>
+                                        <span className="icon_span">Đánh giá</span>
                                     </div>
                                 </div>
                             </Link>
@@ -52,7 +62,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-newspaper"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Đăng tin</span>
+                                        <span className="icon_span">Đăng tin</span>
                                     </div>
                                 </div>
                             </Link>
@@ -62,7 +72,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-comment-dollar"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Bảng giá</span>
+                                        <span className="icon_span">Bảng giá</span>
                                     </div>
                                 </div>
                             </Link>
@@ -72,7 +82,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-money-check-alt"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Thanh toán</span>
+                                        <span className="icon_span">Thanh toán</span>
                                     </div>
                                 </div>
                             </Link>
@@ -82,7 +92,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-sliders-h"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Thay đổi silder</span>
+                                        <span className="icon_span">Thay đổi silder</span>
                                     </div>
                                 </div>
                             </Link>
@@ -92,7 +102,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-user-circle"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Quản lí tài khoản</span>
+                                        <span className="icon_span">Quản lí tài khoản</span>
                                     </div>
                                 </div>
                             </Link>
@@ -102,7 +112,7 @@ export default function MenuAdmin() {
                                 <div className="color-container d-flex align-items-center">
                                     <div className="icon_center" style={{paddingLeft:'5%'}}>
                                         <i className="icon_icon fas fa-sign-out-alt"></i>
-                                        <span className="icon_span" style={{paddingLeft:'3px',fontSize:'18px',fontWeight:'bolder'}}>Đăng xuất</span>
+                                        <span className="icon_span">Đăng xuất</span>
                                     </div>
                                 </div>
                             </Button>

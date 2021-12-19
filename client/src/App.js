@@ -52,7 +52,7 @@ function App() {
                             <Route exact path='/confirm'render={props=><Loading {...props} PageRoute='confirm' />} />
                             <Route exact path='/products/:slug'render={props=><Loading {...props} PageRoute='productDetail' />} />
                             <Route exact path='/admin' render={props=><Admin {...props} AdminRoute='AdminLogin' />} />
-                            <ProtectedRoute exact path='/admin/home' component={AdminHome} />
+                            <ProtectedRoute exact path='/admin/dashboard' component={AdminHome} />
                             <ProtectedRoute exact path='/admin/products' component={AdminProduct} />
                             <ProtectedRoute exact path='/admin/quotes' component={AdminQuote} />
                             <ProtectedRoute exact path='/admin/comments' component={AdminComment} />

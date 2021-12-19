@@ -16,7 +16,7 @@ export default function Admin({AdminRoute}) {
             </div>
         )
     }else if(isAuthenticated) {
-        return <Redirect to='/admin/products' />
+        return <Redirect to='/admin/dashboard' />
     }
     else {
         body=(
