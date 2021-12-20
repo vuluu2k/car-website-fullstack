@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Card, Row, Col, Spinner } from "react-bootstrap";
 import { ProductContext } from "../../../contexts/ProductContext";
 import { QuoteContext } from "../../../contexts/QuoteContext";
@@ -10,14 +10,19 @@ import { Chart } from "react-chartjs-2";
 
 export default function AdminHome() {
   const {
-    productState: { products, productsLoading },
+    productState: { products, productsLoading }, getProduct
   } = useContext(ProductContext);
   const {
-    quoteState: { quotes, quotesLoading },
+    quoteState: { quotes, quotesLoading },getQuote
   } = useContext(QuoteContext);
   const {
-    orderState: { orders, ordersLoading },
+    orderState: { orders, ordersLoading },getOrder
   } = useContext(PayContext);
+  useEffect(()=>{
+    getProduct()
+    getQuote()
+    getOrder()
+  },[])
   const productChart = groupBy(products, (item) => {
     return dayjs(item.createdAt).format("DD-MM-YYYY");
   });
@@ -87,8 +92,11 @@ export default function AdminHome() {
             labels: daysLength(),
             datasets: [
               {
-                backgroundColor: "blue",
+                backgroundColor: "rgb(0, 0, 255,0.4)",
+                borderWidth: 3,
                 borderColor: "blue",
+                tension:0.4,
+                fill:"start",
                 id: 1,
                 label: "Sản phẩm",
                 data: Object.keys(productChart).map((key) => {
@@ -100,8 +108,11 @@ export default function AdminHome() {
                 }),
               },
               {
-                backgroundColor: "green",
+                backgroundColor: "rgb(0, 128, 0,0.4)",
+                borderWidth: 3,
                 borderColor: "green",
+                tension:0.4,
+                fill:"start",
                 id: 2,
                 label: "Báo giá",
                 data: Object.keys(quoteChart).map((key) => {
@@ -113,8 +124,11 @@ export default function AdminHome() {
                 }),
               },
               {
-                backgroundColor: "red",
+                backgroundColor: "rgb(255, 0, 0,0.4)",
+                borderWidth: 3,
                 borderColor: "red",
+                tension:0.4,
+                fill:"start",
                 id: 2,
                 label: "Đơn hàng",
                 data: Object.keys(orderChart).map((key) => {
