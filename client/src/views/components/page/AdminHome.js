@@ -113,15 +113,6 @@ export default function AdminHome() {
                 borderColor: "green",
                 tension:0.4,
                 fill:"start",
-                id: 2,
-                label: "Báo giá",
-                data: Object.keys(quoteChart).map((key) => {
-                  if (daysLength().includes(key)) {
-                    return quoteChart[key].length;
-                  } else {
-                    return 0;
-                  }
-                }),
               },
               {
                 backgroundColor: "rgb(255, 0, 0,0.4)",
