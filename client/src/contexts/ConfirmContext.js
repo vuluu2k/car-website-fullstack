@@ -17,12 +17,17 @@ const ConfirmContextProvider= ({children})=>{
         show:false,
         productId:''
     })
+    const [showConfirmDeleteAccount,setShowConfirmDeleteAccount]=useState({
+        show:false,
+        accountId:''
+    })
 
     const confirmContextData={
         showConfirmLogout,setShowConfirmLogout,
         showConfirmDeleteQuote,setShowConfirmDeleteQuote,
         showConfirmDeleteComment,setShowConfirmDeleteComment,
-        showConfirmDeleteProudctInCart,setShowConfirmDeleteProudctInCart
+        showConfirmDeleteProudctInCart,setShowConfirmDeleteProudctInCart,
+        showConfirmDeleteAccount,setShowConfirmDeleteAccount
     };
     return(
         <ConfirmContext.Provider value={confirmContextData}> 

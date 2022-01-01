@@ -13,4 +13,12 @@ router.post('/create',AccountController.createAccount);
 
 router.post('/login',AccountController.loginAccount);
 
-module.exports=router;
+// -------------------------
+// [Admin] GET ACCOUNT
+router.get('/accountView', AccountController.getAccount);
+//---------------------------
+// [Admin] xoá 1 tài khoản
+// router.delete('/:id',AccountController.deleteAccount)
+//---------------------------
+
+module.exports=router; 

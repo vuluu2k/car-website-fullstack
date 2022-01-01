@@ -1,7 +1,13 @@
 export const apiUrl =
+
+    // process.env.NODE_ENV !== "production" ?
+    // //"http://localhost:5000/api":
+    // "https://cars-shop-vuluu.herokuapp.com/api":"";
+
     process.env.NODE_ENV !== "production" ?
-    "http://localhost:5000/api":
-    "https://cars-shop-vuluu.herokuapp.com/api";
+    "http://localhost:5000/api"
+    : "";
+
 export const LOCAL_STORAGE_ACCOUNT_NAME = 'account_store';
 export const LOCAL_STORAGE_PRODUCTS_CART_NAME = 'products_cart_store';
 
@@ -38,8 +44,15 @@ export const PRODUCT_UPDATE_SUCCESS = "PRODUCT_UPDATE_SUCCESS";
 export const LOAD_CART_SUCCESS = "LOAD_CART_SUCCESS";
 
 // [ACCOUNT]
+export const ACCOUNT_CREATE_SUCCESS="ACCOUNT_CREATE_SUCCESS";
 
-export const SET_ACCOUNT = "SET_ACCOUNT";
+export const SET_ACCOUNT="SET_ACCOUNT";
+//  ------------------------------------
+ export const GET_ACCOUNT="GET_ACCOUNT";
+ export const ACCOUNT_LOAD_SUCCESS="ACCOUNT_LOAD_SUCCESS";
+ export const ACCOUNT_LOAD_FAIL="ACCOUNT_LOAD_FAIL";
+ export const ACCOUNT_UPDATE_SUCCESS="ACCOUNT_UPDATE_SUCCESS";
+ export const DELETE_ACCOUNT_SUCCESS="DELETE_ACCOUNT_SUCESS";
 
 
 //NEW

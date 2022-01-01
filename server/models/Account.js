@@ -10,6 +10,11 @@ const AccountSchema = new Schema(
             type: String,
             required:true
         }
+          //,
+        // level:{
+        //     type:String,
+        //     enum:['admin','employ']
+        // }
     },
     {
         timestamps:true

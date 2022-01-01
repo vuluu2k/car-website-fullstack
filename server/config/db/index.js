@@ -14,5 +14,5 @@ async function connect(){
         console.log('Fail connect to db',e.message);
         process.exit(1);
     }
-}
+} 
 module.exports={connect};
