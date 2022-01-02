@@ -209,7 +209,7 @@ Content-Type: application/json
 //-----------------
 ###
 #Xoá một tài khoản
-# DELETE http://localhost:5000/api/localhost:5000/api/accounts/61a2426fdd27dc919a0c5d80
+// DELETE http://localhost:5000/api/accounts/61a2426fdd27dc919a0c5d80
 
 //------------------
 <<<<<<< HEAD

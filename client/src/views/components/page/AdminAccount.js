@@ -44,7 +44,7 @@ export default function AdminAccount() {
 
     const onSubmit = async event =>{
         event.preventDefault();
-       await createAccount(newAccount);
+        await createAccount(newAccount);
         
     }
 
@@ -103,7 +103,7 @@ export default function AdminAccount() {
                                     </Button> 
                                     */}
                                     
-                                    <Button onClick={()=>setShowConfirmDeleteAccount({show:true,AccountId:item._id})} variant="outline-primary" size="sm" >
+                                    <Button onClick={()=>setShowConfirmDeleteAccount({show:true,accountId:item._id})} variant="outline-primary" size="sm" >
                                         <i className="fas fa-trash"></i>
                                     </Button>
                                 </div>

@@ -74,7 +74,9 @@ const AccountContextProvider = ({children}) =>{
     const createAccount = async (accountForm)=>{
         try {
             const response=await axios.post(`${apiUrl}/accounts`,accountForm);
+            console.log(response.data)
             if(response.data.success){
+                console.log(response.data)
                 dispatch({type:ACCOUNT_CREATE_SUCCESS,payload:response.data.account})
                 return response.data;
             }
