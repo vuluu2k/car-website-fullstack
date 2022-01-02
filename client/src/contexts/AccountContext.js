@@ -1,6 +1,12 @@
 import React from 'react';
 import { createContext,useReducer,useEffect } from 'react';
-import {apiUrl,LOCAL_STORAGE_ACCOUNT_NAME,SET_ACCOUNT} from './contants';
+import {apiUrl,LOCAL_STORAGE_ACCOUNT_NAME,SET_ACCOUNT,
+    ACCOUNT_CREATE_SUCCESS,
+    ACCOUNT_LOAD_SUCCESS,
+    ACCOUNT_LOAD_FAIL,
+    ACCOUNT_UPDATE_SUCCESS,
+    DELETE_ACCOUNT_SUCESS
+    } from './contants';
 import { accountReducer } from '../reducers/accountReducer';
 import setAccountToken from '../utils/setAccountToken';
 import axios from 'axios'
@@ -11,7 +17,13 @@ const AccountContextProvider = ({children}) =>{
     const [accountState,dispatch]=useReducer(accountReducer,{
         accountLoading:true,
         isAuthenticated:false,
-        account:null
+        account:null,
+//---------------------
+        accounts:[],
+        accountsLoading:true
+
+// ---------------------------------
+
     })
     const loadAccount= async () =>{
         if(localStorage[LOCAL_STORAGE_ACCOUNT_NAME]){
@@ -58,9 +70,40 @@ const AccountContextProvider = ({children}) =>{
         });
     }
 
+// --------------------------------------
+//[CREATE] ACCOUNTS
+const createAccount = async (accountForm)=>{
+    try {
+        const response=await axios.post(`${apiUrl}/accounts`,accountForm);
+        if(response.data.success){
+            dispatch({type:ACCOUNT_CREATE_SUCCESS,payload:response.data.account})
+            return response.data;
+        }
+    } catch (e) {
+        return e.response.data ? e.response.data:{success:false,message:'Lỗi Server'}
+    }
+}
+
+// [GET] ACCOUNTS
+
+const getAccount=async ()=>{
+    try {
+        const response=await axios.get(`${apiUrl}/accounts/accountView`)
+        // console.log(response.data)
+        if(response.data.success){
+            // dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:response.data.accounts})
+            dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:{isAuthenticated:true,accounts:response.data.accounts}})
+        }
+    } catch (e) {
+        dispatch({type:ACCOUNT_LOAD_FAIL,payload:{isAuthenticated:true,accounts:[]}})
+    }
+}
 
 
-    const accountContextData={accountState,loginAccount,logoutAccount}
+// ------------------------------------------
+
+
+    const accountContextData={accountState,loginAccount,logoutAccount,getAccount,createAccount}
     return (
         <AccountContext.Provider value={accountContextData}>
             {children}

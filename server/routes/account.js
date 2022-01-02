@@ -13,4 +13,8 @@ router.post('/create',AccountController.createAccount);
 
 router.post('/login',AccountController.loginAccount);
 
+// -------------------------
+// [Admin] GET ACCOUNT
+router.get('/accountView', AccountController.getAccount);
+
 module.exports=router;

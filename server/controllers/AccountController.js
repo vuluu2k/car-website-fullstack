@@ -63,6 +63,17 @@ class AccountController{
                 .json({success:false,message:'Lỗi máy chủ nội bộ'});
         }
     }
+    // -----------------------------------------
+    async getAccount(req, res){
+        try {
+            const accounts = await Account.find({});
+            res.json({success: true, accounts:accounts})
+        } catch (e) {
+            console.log(e);
+            res.status(500)
+                .json({success:false,message:'Lỗi máy chủ nội bộ'});
+        }
+    }
 }
 
 module.exports = new AccountController();
