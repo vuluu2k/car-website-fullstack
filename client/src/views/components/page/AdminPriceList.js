@@ -1,40 +1,31 @@
 import React from 'react';
-import {Card,Table,Button,Row,Container,Col,Form} from 'react-bootstrap';
+import {Card,Table,Button,Container,Col,Form} from 'react-bootstrap';
 import {useContext,useEffect} from 'react';
 import {ProductContext} from '../../../contexts/ProductContext';
-import AddCarModal from '../../../components/modal/AddCarModal'
-import UpdateCarModal from '../../../components/modal/UpdateCarModal'
-import ViewCarModal from '../../../components/modal/ViewCarModal';
-import ConfirmModal from '../../../components/modal/ConfirmModal'
+
 
 
 export default function AdminPriceList() {
     const {
-        productState:{products,productLoading},
-        getProduct,setShowAddCar,
-        showDelCar:{show,productId},
-        setShowDelCar,deleteProduct,
+        productState:{products},
+        getProduct,
+        showDelCar:{},
+      
         getProductDetail,setShowUpdateCar,
-        setShowViewCar
+     
 
     }=useContext(ProductContext);
     useEffect(()=>{
         getProduct()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    const handleDelProduct = ()=>{
-        deleteProduct(productId);
-        handleClose();
-    }
-    const handleClose =() =>setShowDelCar({show:false,productId:''});
+    
+    
     const choseProductUpdate= (productId)=>{
         getProductDetail(productId)
         setShowUpdateCar(true)
     }
-    const choseProductView =(productId)=>{
-        getProductDetail(productId)
-        setShowViewCar(true)
-    }
+  
     return (
         <Container style={{padding:'36px 0'}}>
             {products.map(product=>(

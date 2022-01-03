@@ -251,3 +251,9 @@ Content-Type: application/json
 GET http://localhost:5000/api/accounts
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTZhZWEwYzVmNzljYjVlYjRjNjhlYjMiLCJpYXQiOjE2MzQzOTcxMTl9.-_GQ8Ti1SuFrRFKtvfw5xUJAn6apF1qgXcO8M3hf6o8
 >>>>>>> lieu
+# --------------------------------------------------------------
+###
+# Nhận tài khoản
+GET http://localhost:5000/api/accounts
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2MTZhZWEwYzVmNzljYjVlYjRjNjhlYjMiLCJpYXQiOjE2MzgwMjIzMTd9.9KQw9gXulydrwLyhMIqmfq02hdRIaiLu0MpgpsqOFgY
+
