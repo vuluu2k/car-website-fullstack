@@ -25,7 +25,7 @@ export default function Comment() {
       getComment(productSlug._id)
       // eslint-disable-next-line react-hooks/exhaustive-deps
   },[productSlug])
-    const {nameComment, emailComment,product,contentComment,rate} =newComment;
+    const {nameComment, emailComment,contentComment,rate} =newComment;
     const onChangeCreateCommentForm= event => setNewComment({
       ...newComment,
       product:productSlug._id,
@@ -40,7 +40,7 @@ export default function Comment() {
         event.preventDefault();
         const {success,message}=await createComment(newComment);
         setShowToastComment({show:success,message});
-        if(nameComment!=''&&emailComment!=''&&contentComment!=''&&rate!='')
+        if(nameComment!==''&&emailComment!==''&&contentComment!==''&&rate!=='')
         {
           handleClose();
           

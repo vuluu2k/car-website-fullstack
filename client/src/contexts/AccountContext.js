@@ -3,9 +3,7 @@ import { createContext,useReducer,useEffect } from 'react';
 import {apiUrl,LOCAL_STORAGE_ACCOUNT_NAME,SET_ACCOUNT,
     ACCOUNT_CREATE_SUCCESS,
     ACCOUNT_LOAD_SUCCESS,
-    ACCOUNT_LOAD_FAIL,
-    ACCOUNT_UPDATE_SUCCESS,
-    DELETE_ACCOUNT_SUCESS
+    ACCOUNT_LOAD_FAIL
     } from './contants';
 import { accountReducer } from '../reducers/accountReducer';
 import setAccountToken from '../utils/setAccountToken';
@@ -74,8 +72,9 @@ const AccountContextProvider = ({children}) =>{
 //[CREATE] ACCOUNTS
 const createAccount = async (accountForm)=>{
     try {
-        const response=await axios.post(`${apiUrl}/accounts`,accountForm);
+        const response=await axios.post(`${apiUrl}/accounts/create`,accountForm);
         if(response.data.success){
+            
             dispatch({type:ACCOUNT_CREATE_SUCCESS,payload:response.data.account})
             return response.data;
         }
@@ -89,7 +88,6 @@ const createAccount = async (accountForm)=>{
 const getAccount=async ()=>{
     try {
         const response=await axios.get(`${apiUrl}/accounts/accountView`)
-        // console.log(response.data)
         if(response.data.success){
             // dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:response.data.accounts})
             dispatch({type:ACCOUNT_LOAD_SUCCESS,payload:{isAuthenticated:true,accounts:response.data.accounts}})

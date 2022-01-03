@@ -1,7 +1,5 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, { useState, useContext, useEffect} from 'react'
 import {Table,Form,Button} from 'react-bootstrap';
-import {ConfirmContext} from '../../../contexts/ConfirmContext';
-import ConfirmModal from '../../../components/modal/ConfirmModal';
 import './css/AdminAccount.css'
 import {
     AccountContext
@@ -9,14 +7,25 @@ import {
 
 export default function AdminAccount() {
 
-    const {getAccount, createAccount, deleteAccount, accountState: {accounts} } = useContext(AccountContext)
+    const {getAccount, createAccount, accountState: {accounts} } = useContext(AccountContext)
     
     
     useEffect(() =>{
         getAccount()
         // eslint-disable-nest-line react-hooks/exhaustive-deps
     },[]);
-    console.log(accounts)
+    const [newAccount, setNewAccount] = useState({
+        nameAccount:'',
+        passwordAccount:'',
+    
+    })
+
+    const onSubmit = async event =>{
+        event.preventDefault();
+       await createAccount(newAccount);
+        
+
+    }
 
     return (
         <div className="container">
@@ -32,7 +41,7 @@ export default function AdminAccount() {
                    
                 </Form.Group>
 
-                <Button variant="primary" type="submit" style={{margin:'20px'}}>
+                <Button variant="primary" type="submit" onClick={onSubmit} style={{margin:'20px'}}>
                     Thêm
                 </Button>
 
