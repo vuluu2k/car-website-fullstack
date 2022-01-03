@@ -100,14 +100,14 @@ export default function UpdateCarModal() {
             alert('Bạn chưa nhập tên sản phẩm')
             return
         }
-        if(validator.isEmpty(costCar)){
-            alert('Bạn chưa nhập giá sản phẩm')
-            return
-        }
-        if(!validator.isDecimal(costCar)){
-            alert('số giá sản phẩm phải là kiểu số')
-            return
-        }
+        // if(validator.isEmpty(costCar)){
+        //     alert('Bạn chưa nhập giá sản phẩm')
+        //     return
+        // }
+        // if(!validator.isDecimal(costCar)){
+        //     alert('số giá sản phẩm phải là kiểu số')
+        //     return
+        // }
         await updateProduct(updateCar);
         handleClose();
     }
